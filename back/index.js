@@ -9,8 +9,11 @@ const User = require("./models/User");
 const bcrypt = require("bcrypt");
 const session = require("express-session");
 const jwt = require("jsonwebtoken");
+const path = require("path");
 
 const authRoutes = require("./routes/AuthRoutes");
+const shopRoutes = require("./routes/ShopRoutes");
+const buyRoutes = require("./routes/BuyRoutes");
 
 require("dotenv").config();
 
@@ -99,6 +102,9 @@ app.get(
 );
 
 app.use("/api/auth", authRoutes);
+app.use("/api/shop", shopRoutes);
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use("/api/buy", buyRoutes);
 
 mongoose
   .connect(process.env.mongoURI, {

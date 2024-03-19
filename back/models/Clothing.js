@@ -20,7 +20,7 @@ const clothingSchema = new mongoose.Schema({
     type: String,
   },
   images: {
-    type: String,
+    type: [String],
     required: true,
   },
 });

@@ -1,6 +1,7 @@
 import image1 from "../assets/images/anh-nhat-YKFBdV-RRXI-unsplash.jpg";
 import image2 from "../assets/images/domino-164_6wVEHfI-unsplash.webp";
 import image5 from "../assets/images/faith-yarn-Wr0TpKqf26s-unsplash.webp";
+import { Link } from "react-router-dom";
 
 const Protected = () => {
   return (
@@ -20,13 +21,15 @@ const Protected = () => {
           />
           <p className="text-center">Accessories</p>
         </div>
-        <div className="hover:w-[110%] hover:h-[110%] hover:z-10 hover:text-xl">
-          <img
-            src={image2}
-            className="w-full h-full max-h-[400px] rounded-xl object-cover"
-          />
-          <p className="text-center">Clothing</p>
-        </div>
+        <Link to="/cloths">
+          <div className="hover:w-[110%] hover:h-[110%] hover:z-10 hover:text-xl">
+            <img
+              src={image2}
+              className="w-full h-full max-h-[400px] rounded-xl object-cover"
+            />
+            <p className="text-center">Clothing</p>
+          </div>
+        </Link>
         <div className="hover:w-[110%] hover:h-[110%] hover:z-10">
           <img
             src={image5}

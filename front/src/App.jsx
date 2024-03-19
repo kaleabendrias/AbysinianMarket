@@ -9,6 +9,8 @@ import Protected from "./components/Protected";
 import MainLayOut from "./components/MainLayout";
 import ProtectedWrap from "./components/ProtectedWrap";
 import SellForm from "./components/SellForm";
+import Clothing from "./components/Clothing";
+import BuyForm from "./components/BuyForm";
 
 function App() {
   return (
@@ -66,6 +68,30 @@ function App() {
               element={
                 <MainLayOut>
                   <SellForm />
+                </MainLayOut>
+              }
+            ></ProtectedWrap>
+          }
+        />
+        <Route
+          path="/cloths"
+          element={
+            <ProtectedWrap
+              element={
+                <MainLayOut>
+                  <Clothing />
+                </MainLayOut>
+              }
+            ></ProtectedWrap>
+          }
+        />
+        <Route
+          path="/buyform"
+          element={
+            <ProtectedWrap
+              element={
+                <MainLayOut>
+                  <BuyForm />
                 </MainLayOut>
               }
             ></ProtectedWrap>

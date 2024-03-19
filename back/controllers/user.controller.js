@@ -217,7 +217,7 @@ exports.sell = async (req, res) => {
         await newProperty.save();
       } else if (type === "clothing") {
         const newClothing = new Clothing({
-          // ... clothing specific properties ...
+          type,
           description,
           price,
           color,

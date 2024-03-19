@@ -1,12 +1,3 @@
-import {
-  FaFacebook,
-  FaGithub,
-  FaInstagram,
-  FaTwitter,
-  FaLinkedin,
-  FaGoogle,
-} from "react-icons/fa";
-
 const Footer = () => {
   return (
     <>
@@ -20,15 +11,6 @@ const Footer = () => {
           </p>
         </div>
         <div className="">
-          <div className="flex items-center justify-center w-full space-x-3">
-            <FaFacebook style={{ fontSize: "34px" }} />
-            <FaGithub style={{ fontSize: "34px" }} />
-            <FaInstagram style={{ fontSize: "34px" }} />
-            <FaTwitter style={{ fontSize: "34px" }} />
-            <FaLinkedin style={{ fontSize: "34px" }} />
-            <FaGoogle style={{ fontSize: "34px" }} />
-          </div>
-
           <div className="flex items-center justify-center mt-5 text-lg space-x-2">
             <p>Signup for our newsletter</p>
             <input type="text" />

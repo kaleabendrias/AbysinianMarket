@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SellForm = () => {
   const [selectedType, setSelectedType] = useState("");
@@ -8,6 +9,7 @@ const SellForm = () => {
   const [size, setSize] = useState("");
   const [color, setColor] = useState("");
   const [selectedImages, setSelectedImages] = useState([]);
+  const navigate = useNavigate();
 
   const handleImageChange = (event) => {
     const newImages = Array.from(event.target.files); // Convert FileList to array
@@ -43,6 +45,7 @@ const SellForm = () => {
 
       // Handle successful response from the server
       console.log(response.data);
+      navigate("/protected");
       // Clear form fields or display a success message
     } catch (error) {
       console.error(error);

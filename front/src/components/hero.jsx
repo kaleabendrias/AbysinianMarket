@@ -20,7 +20,8 @@ export function SparklesPreview() {
           />
         </div>
         <h1 className="md:text-7xl text-3xl lg:text-6xl font-bold text-center text-white relative z-20">
-          AbyssiniaMarket - Your Ultimate Shopping Destination!
+          <span className="font-mono">AbysiniaMarket</span> - Your Ultimate
+          Shopping Destination!
         </h1>
       </div>
 
@@ -154,7 +155,7 @@ export function SparklesPreview() {
         </div>
       </div>
 
-      <div className="flex flex-col md:flex-row justify-between items-center mt-16 text-xl md:text-2xl">
+      <div className="flex flex-col md:flex-row justify-between items-center mt-16 text-xl md:text-2xl bg-slate-200 md:space-x-16">
         <div className="m-4">
           <p>
             <span className="text-blue-600 text-8xl">&ldquo;</span>
@@ -163,8 +164,8 @@ export function SparklesPreview() {
             praesentium repudiandae eaque quisquam, at voluptatem ex molestias
             quasi necessitatibus ratione. Doloribus, nostrum.
           </p>
-          <p className="text-blue-700 mt-4">kaleab Endrias</p>
-          <p className="text-lg">CEO</p>
+          <p className="text-blue-700 mt-4 font-mono">kaleab Endrias</p>
+          <p className="text-lg font-mono">CEO</p>
         </div>
         <div className="m-4">
           <p>
@@ -174,8 +175,8 @@ export function SparklesPreview() {
             praesentium repudiandae eaque quisquam, at voluptatem ex molestias
             quasi necessitatibus ratione. Doloribus, nostrum.
           </p>
-          <p className="text-blue-700 mt-4">meseret Defar</p>
-          <p className="text-lg">Long distance athlete</p>
+          <p className="text-blue-700 mt-4 font-mono">Meseret Defar</p>
+          <p className="text-lg font-mono">Long distance athlete</p>
         </div>
       </div>
     </>

@@ -49,19 +49,23 @@ const Navbar = () => {
       <div className="fixed top-0 left-0 w-full z-50 p-6 bg-black text-white bg-opacity-90">
         <div className="flex justify-between items-center px-16">
           <div>
-            <p>
-              <span className="bg-white rounded-lg p-1 text-slate-900 font-bold">
-                Abysinia
-              </span>{" "}
-              Market
-            </p>
+            <Link to="/">
+              <p className="font-mono">
+                <span className="bg-white rounded-lg p-1 text-slate-900 font-bold font-mono">
+                  Abysinia
+                </span>{" "}
+                Market
+              </p>
+            </Link>
           </div>
 
           <div className="hidden sm:flex sm:justify-between sm:space-x-4 text-lg">
-            <Link to="/" className="">
+            <Link to="/" className="active:bg-yellow-700">
               Home
             </Link>
-            <Link to="/about">About</Link>
+            <Link to="/about" className="active:bg-yellow-700">
+              About
+            </Link>
           </div>
           <div className="">
             {!isAuthenticated ? (
