@@ -73,9 +73,9 @@ const SellForm = () => {
               onChange={(e) => setSelectedType(e.target.value)}
             >
               <option value="">Select Type</option>
-              <option value="vehicle">Vehicle</option>
-              <option value="property">Property</option>
-              <option value="clothing">Clothing</option>
+              <option value="Silk">Silk</option>
+              <option value="?">?</option>
+              <option value="others">others</option>
             </select>
           </div>
           <div className="flex flex-col justify-center">

@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { FaEye, FaEyeSlash, FaSpinner, FaGoogle } from "react-icons/fa";
+import { FaSpinner } from "react-icons/fa";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const BuyForm = () => {
   const [loading, setLoading] = useState(false);
@@ -11,8 +10,6 @@ const BuyForm = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-
-  const navigate = useNavigate();
 
   const handleBuy = async (e) => {
     e.preventDefault();

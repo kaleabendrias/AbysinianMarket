@@ -185,7 +185,7 @@ exports.sell = async (req, res) => {
       }
 
       // Access form data (text fields) from req.body
-      const type = req.body.type;
+      const type = "clothing";
       const description = req.body.description; // Corrected typo
       const price = req.body.price;
       const size = req.body.size;
