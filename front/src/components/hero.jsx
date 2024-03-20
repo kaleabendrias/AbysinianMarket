@@ -1,4 +1,4 @@
-import { SparklesCore } from "./ui/sparkles";
+// import { SparklesCore } from "./ui/sparkles";
 // import image1 from "../assets/images/anh-nhat-YKFBdV-RRXI-unsplash.jpg";
 // import image2 from "../assets/images/domino-164_6wVEHfI-unsplash.webp";
 // import image5 from "../assets/images/nordwood-themes-_sg8nXmpWDM-unsplash.jpg";
@@ -12,9 +12,14 @@ import image10 from "../assets/images/Mystic Elegance_ Dark Patterned Habesha Dr
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { motion, useInView } from "framer-motion";
 
 export function SparklesPreview() {
   const [data, setData] = useState([]);
+  const [text, setText] = useState("");
+  const fullText = "AbysiniaMarket - Your Ultimate Shopping Destination!";
+  const typingSpeed = 50;
+
   useEffect(() => {
     const getClothes = async () => {
       try {
@@ -29,23 +34,27 @@ export function SparklesPreview() {
 
     getClothes();
   }, []);
+
+  useEffect(() => {
+    let currentIndex = 0;
+    const interval = setInterval(() => {
+      if (currentIndex <= fullText.length) {
+        setText(fullText.substring(0, currentIndex));
+        currentIndex++;
+      } else {
+        clearInterval(interval);
+      }
+    }, typingSpeed);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
       <div className="h-[40rem] relative w-full bg-black flex flex-col items-center justify-center overflow-hidden rounded-md">
-        <div className="w-full absolute inset-0 h-screen">
-          <SparklesCore
-            id="tsparticlesfullpage"
-            background="transparent"
-            minSize={0.6}
-            maxSize={1.4}
-            particleDensity={100}
-            className="w-full h-full"
-            particleColor="#FFFFFF"
-          />
-        </div>
+        <div className="w-full absolute inset-0 h-screen"></div>
         <h1 className="md:text-7xl text-3xl lg:text-6xl font-bold text-center text-white relative z-20">
-          <span className="font-mono">AbysiniaMarket</span> - Your Ultimate
-          Shopping Destination!
+          <span className="font-mono">{text}</span>
         </h1>
       </div>
 
@@ -241,34 +250,46 @@ export function SparklesPreview() {
       </div>
       <div className="my-8">
         <div className="flex flex-col md:flex-row items-center text-lg space-x-4">
-          <div className="flex flex-col space-x-2 items-center justify-center">
-            <img src={guts} className="h-32 w-32 rounded-full" />
-            <p>
-              <span className="text-6xl text-blue-500">&ldquo;</span>
-              Welcome to the realm of Habesha style! Our digital fortress is
-              where the spirits of Ethiopia&apos;s culture converge. Dive into
-              the fray and claim your slice of tradition with our authentic
-              garments. From the hills of Ethiopia to the pixels of your screen,
-              we&apos;re here to unleash the essence of Habesha fashion. Embrace
-              the adventure, fellow warrior!
-            </p>
-            <p className="text-blue-700 text-xl font-bold">Guts</p>
-            <p className="font-light">CEO</p>
-          </div>
-          <div className="flex flex-col space-x-2 items-center justify-center">
-            <img src={eren} className="h-32 w-32 rounded-full" />
-            <p>
-              <span className="text-6xl text-blue-500">&ldquo;</span>
-              Hey, you! Ready to unlock the power of Habesha fashion? Our site
-              is the key to your titan-sized wardrobe dreams. From the dusty
-              streets of Ethiopia to your fingertips, we&apos;re here to
-              revolutionize your style. Join the fight for cultural expression
-              and unleash your inner titan with our authentic garments.
-              It&apos;s time to soar above the walls of fashion conformity!
-            </p>
-            <p className="text-blue-700 text-xl font-bold">Eren Yager</p>
-            <p className="font-light">Developer</p>
-          </div>
+          <motion.div
+            initial={{ x: -100 }}
+            whileInView={{ x: 1 }}
+            transition={{ type: "spring", stiffness: 100, duration: 0.5 }}
+          >
+            <div className="flex flex-col space-x-2 items-center justify-center">
+              <img src={guts} className="h-32 w-32 rounded-full" />
+              <p>
+                <span className="text-6xl text-blue-500">&ldquo;</span>
+                Welcome to the realm of Habesha style! Our digital fortress is
+                where the spirits of Ethiopia&apos;s culture converge. Dive into
+                the fray and claim your slice of tradition with our authentic
+                garments. From the hills of Ethiopia to the pixels of your
+                screen, we&apos;re here to unleash the essence of Habesha
+                fashion. Embrace the adventure, fellow warrior!
+              </p>
+              <p className="text-blue-700 text-xl font-bold">Guts</p>
+              <p className="font-light">CEO</p>
+            </div>
+          </motion.div>
+          <motion.div
+            initial={{ x: 100 }}
+            whileInView={{ x: 1 }}
+            transition={{ type: "spring", stiffness: 100 }}
+          >
+            <div className="flex flex-col space-x-2 items-center justify-center">
+              <img src={eren} className="h-32 w-32 rounded-full" />
+              <p>
+                <span className="text-6xl text-blue-500">&ldquo;</span>
+                Hey, you! Ready to unlock the power of Habesha fashion? Our site
+                is the key to your titan-sized wardrobe dreams. From the dusty
+                streets of Ethiopia to your fingertips, we&apos;re here to
+                revolutionize your style. Join the fight for cultural expression
+                and unleash your inner titan with our authentic garments.
+                It&apos;s time to soar above the walls of fashion conformity!
+              </p>
+              <p className="text-blue-700 text-xl font-bold">Eren Yager</p>
+              <p className="font-light">Developer</p>
+            </div>
+          </motion.div>
         </div>
       </div>
 
@@ -277,29 +298,35 @@ export function SparklesPreview() {
         <div className="grid grid-cols-1 md:grid-cols-2">
           {data.slice(0, 2).map((clothingItem, index) => (
             <>
-              <div className="max-w-xl relative">
-                {clothingItem.images.map((image, imageIndex) => (
-                  <img
-                    key={imageIndex}
-                    className="h-full w-full object-cover"
-                    src={`http://localhost:5000/uploads/${image}`}
-                    alt={`product image ${imageIndex + 1}`}
-                  />
-                ))}
-                <p className="w-full mb-16 absolute bottom-3 text-lg text-black font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white bg-opacity-40 rounded-lg p-2">
-                  {clothingItem.description}
-                </p>
-                <p className="absolute bottom-16 text-lg text-black font-bold left-1/2 transform -translate-x-1/2 bg-white bg-opacity-40 rounded-lg p-2 mb-2">
-                  <span className="">Price: </span>
-                  {clothingItem.price}
-                </p>
-                <Link
-                  to="/cloths"
-                  className="absolute bottom-1 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-600 text-white px-4 py-2 rounded-md"
-                >
-                  Buy
-                </Link>
-              </div>
+              <motion.div
+                initial={{ scale: 0.5 }}
+                whileInView={{ scale: 1 }}
+                transition={{ type: "spring", stiffness: 100 }}
+              >
+                <div className="max-w-xl relative">
+                  {clothingItem.images.map((image, imageIndex) => (
+                    <img
+                      key={imageIndex}
+                      className="h-full w-full object-cover"
+                      src={`http://localhost:5000/uploads/${image}`}
+                      alt={`product image ${imageIndex + 1}`}
+                    />
+                  ))}
+                  <p className="w-full mb-16 absolute bottom-3 text-lg text-black font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white bg-opacity-40 rounded-lg p-2">
+                    {clothingItem.description}
+                  </p>
+                  <p className="absolute bottom-16 text-lg text-black font-bold left-1/2 transform -translate-x-1/2 bg-white bg-opacity-40 rounded-lg p-2 mb-2">
+                    <span className="">Price: </span>
+                    {clothingItem.price}
+                  </p>
+                  <Link
+                    to="/cloths"
+                    className="absolute bottom-1 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-600 text-white px-4 py-2 rounded-md"
+                  >
+                    Buy
+                  </Link>
+                </div>
+              </motion.div>
             </>
           ))}
         </div>

@@ -20,6 +20,26 @@ const Clothing = () => {
     getClothes();
   }, []);
 
+  const handleBuy = async (e, id) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/api/buy/",
+        { id },
+        {
+          withCredentials: true,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      console.log(res);
+      console.log(id);
+      const checkoutUrl = res.data.data.checkout_url;
+      window.location.href = checkoutUrl;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <div className="my-28 flex flex-wrap justify-center">
       {data.map((clothingItem, index) => (
@@ -59,8 +79,8 @@ const Clothing = () => {
                 </span>
               </p>
             </div>
-            <Link
-              to="/buyform"
+            <button
+              onClick={(e) => handleBuy(e, clothingItem._id)}
               className="hover:border-white/40 flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-blue-300"
             >
               <svg
@@ -73,7 +93,7 @@ const Clothing = () => {
                 <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
               Buy
-            </Link>
+            </button>
           </div>
         </div>
       ))}

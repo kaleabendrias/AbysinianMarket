@@ -84,6 +84,16 @@ const Navbar = () => {
             >
               About
             </Link>
+            {isAuthenticated ? (
+              <Link
+                to="/protected"
+                className={`text-white px-1 py-1 rounded ${
+                  location.pathname === "/protected" ? "bg-slate-800" : ""
+                }`}
+              >
+                Cloths
+              </Link>
+            ) : null}
           </div>
           <div className="">
             {!isAuthenticated ? (

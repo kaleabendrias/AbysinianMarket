@@ -4,7 +4,7 @@ import axios from "axios";
 
 const BuyForm = () => {
   const [loading, setLoading] = useState(false);
-  const [amount, setAmount] = useState("");
+  // const [amount, setAmount] = useState("");
   const [currency, setCurrency] = useState("");
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -22,7 +22,7 @@ const BuyForm = () => {
       const res = await axios.post(
         "http://localhost:5000/api/buy/",
         {
-          amount,
+          // amount,
           currency,
           email,
           firstName,
@@ -34,7 +34,7 @@ const BuyForm = () => {
           headers: { "Content-Type": "application/json" },
         }
       );
-      console.log(res);
+      console.log(res.data.data);
       const checkoutUrl = res.data.data.checkout_url;
       window.location.href = checkoutUrl;
     } catch (error) {
@@ -48,13 +48,13 @@ const BuyForm = () => {
     <div className="mt-24 h-full flex flex-col items-center justify-center">
       <div className="w-[38%]">
         <form className="flex flex-col relative">
-          <label className="font-thin text-xl m-2">amount</label>
+          {/* <label className="font-thin text-xl m-2">amount</label>
           <input
             className="border border-gray-400 rounded-sm focus:outline-none focus:border-gray-600 p-1 m-2"
             type="text"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-          />
+          /> */}
 
           <label className="font-thin text-xl m-2 ">currency</label>
 

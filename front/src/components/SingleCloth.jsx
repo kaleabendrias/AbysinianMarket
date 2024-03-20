@@ -27,6 +27,25 @@ const SingleCloth = () => {
     getClothes();
   }, []);
 
+  const handleBuy = async (e) => {
+    e.preventDefault;
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/api/buy/",
+        { id },
+        { withCredentials: true },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      console.log(res);
+      const checkoutUrl = res.data.data.checkout_url;
+      window.location.href = checkoutUrl;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   if (loading) {
     return <div className="mt-28">Loading...</div>; // Render a loading indicator while fetching data
   }
@@ -73,8 +92,8 @@ const SingleCloth = () => {
               </span>
             </p>
           </div>
-          <Link
-            to="/buyform"
+          <button
+            onClick={handleBuy}
             className="hover:border-white/40 flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-blue-300"
           >
             <svg
@@ -87,7 +106,7 @@ const SingleCloth = () => {
               <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
             </svg>
             Buy
-          </Link>
+          </button>
         </div>
       </div>
     </div>
