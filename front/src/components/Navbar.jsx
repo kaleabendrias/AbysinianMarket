@@ -2,12 +2,13 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { CiMenuBurger } from "react-icons/ci";
 import { Link } from "react-router-dom";
-import checkAuth from "./auth.helper";
 import { useNavigate } from "react-router-dom";
+import isAdmin from "./isadmin";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAdminUser, setIsAdminUser] = useState(false);
   const navigate = useNavigate();
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -15,19 +16,26 @@ const Navbar = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      axios
-        .get("http://localhost:5000/api/auth/checkauth", {
-          withCredentials: true,
-        })
-        .then((response) => {
-          setIsAuthenticated(response.data.auth);
-          console.log(response.data.auth);
-        })
-        .catch((err) => {
-          console.log(err);
-          setIsAuthenticated(false);
-        });
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/api/auth/checkauth",
+          {
+            withCredentials: true,
+          }
+        );
+
+        setIsAuthenticated(response.data.auth);
+
+        if (response.data.auth) {
+          const isAdminResult = await isAdmin();
+          setIsAdminUser(isAdminResult);
+        }
+      } catch (err) {
+        console.log(err);
+        setIsAuthenticated(false);
+      }
     };
+
     fetchData();
   }, []);
 
@@ -62,7 +70,6 @@ const Navbar = () => {
           <div className="hidden sm:flex sm:justify-between sm:space-x-4 text-lg">
             <Link
               to="/"
-              activeClassName="bg-yellow-700"
               className={`text-white px-1 py-1 rounded ${
                 location.pathname === "/" ? "bg-slate-800" : ""
               }`}
@@ -89,12 +96,14 @@ const Navbar = () => {
               </Link>
             ) : (
               <div className="flex justify-center space-x-2">
-                <Link
-                  to="/sellform"
-                  className="sm:flex text-black bg-yellow-400 hover:bg-yellow-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg md:text-sm px-5 py-2.5 focus:outline-none"
-                >
-                  Sell
-                </Link>
+                {isAdminUser && (
+                  <Link
+                    to="/sellform"
+                    className="sm:flex text-black bg-yellow-400 hover:bg-yellow-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg md:text-sm px-5 py-2.5 focus:outline-none"
+                  >
+                    Sell
+                  </Link>
+                )}
                 <Link
                   className="sm:flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg md:text-sm px-5 py-2.5 focus:outline-none"
                   onClick={handleSignout}

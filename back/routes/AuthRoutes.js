@@ -14,6 +14,8 @@ router.post("/signup", authController.signup);
 
 router.get("/checkauth", authController.checkAuth);
 
+router.get("/checkadmin", authController.checkAdmin);
+
 router.get("/verify", authController.verify);
 
 router.get("/logout", authController.logout);

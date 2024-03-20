@@ -131,6 +131,36 @@ exports.checkAuth = async (req, res) => {
   }
 };
 
+// Example implementation in your backend controller
+
+exports.checkAdmin = async (req, res) => {
+  try {
+    // Get the JWT token from the cookie
+    const token = req.cookies.jwt;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ message: "Unauthorized: No token provided" });
+    }
+
+    // Verify and decode the token to extract user information
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+
+    // Assuming the token contains the user's email
+    const userEmail = decodedToken.email;
+    const user = await User.findOne({ email: userEmail });
+    // If no user with that email exists
+    if (user.role === "admin") {
+      return res.status(200).send(true);
+    } else {
+      return res.status(200).send(false);
+    }
+  } catch (e) {
+    console.error(`Unexpected Error: ${e}`);
+  }
+};
+
 exports.verify = (req, res) => {
   const { token } = req.query;
   if (!token) {
