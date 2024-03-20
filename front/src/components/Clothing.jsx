@@ -32,12 +32,18 @@ const Clothing = () => {
             href="#"
           >
             {clothingItem.images.map((image, imageIndex) => (
-              <img
+              <Link
                 key={imageIndex}
-                className="h-full w-full object-cover"
-                src={`http://localhost:5000/uploads/${image}`}
-                alt={`product image ${imageIndex + 1}`}
-              />
+                to={`/cloth/${clothingItem._id}`}
+                className="inline-block max-w-xs m-2"
+              >
+                <img
+                  key={imageIndex}
+                  className="h-full w-full object-cover"
+                  src={`http://localhost:5000/uploads/${image}`}
+                  alt={`product image ${imageIndex + 1}`}
+                />
+              </Link>
             ))}
           </a>
           <div className="mt-4 px-5 pb-5">

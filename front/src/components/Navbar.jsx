@@ -60,10 +60,21 @@ const Navbar = () => {
           </div>
 
           <div className="hidden sm:flex sm:justify-between sm:space-x-4 text-lg">
-            <Link to="/" className="active:bg-yellow-700">
+            <Link
+              to="/"
+              activeClassName="bg-yellow-700"
+              className={`text-white px-1 py-1 rounded ${
+                location.pathname === "/" ? "bg-slate-800" : ""
+              }`}
+            >
               Home
             </Link>
-            <Link to="/about" className="active:bg-yellow-700">
+            <Link
+              to="/about"
+              className={`text-white px-1 py-1 rounded ${
+                location.pathname === "/about" ? "bg-slate-800" : ""
+              }`}
+            >
               About
             </Link>
           </div>

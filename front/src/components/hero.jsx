@@ -274,7 +274,7 @@ export function SparklesPreview() {
 
       <div className="m-14">
         <p className="font-bold text-2xl md:text-4xl">Featured</p>
-        <div className="grid grid-cols-2">
+        <div className="grid grid-cols-1 md:grid-cols-2">
           {data.slice(0, 2).map((clothingItem, index) => (
             <>
               <div className="max-w-xl relative">
@@ -286,17 +286,40 @@ export function SparklesPreview() {
                     alt={`product image ${imageIndex + 1}`}
                   />
                 ))}
-                <p className="absolute bottom-3 text-lg text-black font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <p className="w-full mb-16 absolute bottom-3 text-lg text-black font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white bg-opacity-40 rounded-lg p-2">
                   {clothingItem.description}
                 </p>
-                <p className="absolute bottom-3 text-lg text-black font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <p className="absolute bottom-16 text-lg text-black font-bold left-1/2 transform -translate-x-1/2 bg-white bg-opacity-40 rounded-lg p-2 mb-2">
+                  <span className="">Price: </span>
                   {clothingItem.price}
                 </p>
-                <button className="absolute bottom-1 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-600 text-white px-4 py-2 rounded-md">
+                <Link
+                  to="/cloths"
+                  className="absolute bottom-1 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-600 text-white px-4 py-2 rounded-md"
+                >
                   Buy
-                </button>
+                </Link>
               </div>
             </>
+          ))}
+        </div>
+      </div>
+
+      <div className="">
+        <p className="text-4xl font-bold ml-4">Dress</p>
+
+        <div className="flex overflow-x-auto">
+          {data.map((clothingItem, index) => (
+            <div key={index} className="flex">
+              {clothingItem.images.map((image, imageIndex) => (
+                <img
+                  key={imageIndex}
+                  src={`http://localhost:5000/uploads/${image}`}
+                  alt={image.alt}
+                  className="inline-block max-w-xs m-2"
+                />
+              ))}
+            </div>
           ))}
         </div>
       </div>

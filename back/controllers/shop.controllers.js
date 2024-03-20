@@ -14,6 +14,17 @@ exports.cloths = async (req, res) => {
 };
 
 //Get a single piece of clothing information
-exports.getOneClothe = async (req, res) => {
+exports.cloth = async (req, res) => {
   const id = req.params.id;
+  try {
+    let cloth = await Clothing.findById(id);
+    if (!cloth) {
+      return res.status(404).json({ message: "No such clothing exists!" });
+    }
+
+    res.status(200).json(cloth);
+  } catch (e) {
+    console.log(e);
+    res.status(500).send("Server Error");
+  }
 };

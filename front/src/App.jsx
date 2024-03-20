@@ -11,6 +11,7 @@ import ProtectedWrap from "./components/ProtectedWrap";
 import SellForm from "./components/SellForm";
 import Clothing from "./components/Clothing";
 import BuyForm from "./components/BuyForm";
+import SingleCloth from "./components/SingleCloth";
 
 function App() {
   return (
@@ -92,6 +93,19 @@ function App() {
               element={
                 <MainLayOut>
                   <BuyForm />
+                </MainLayOut>
+              }
+            ></ProtectedWrap>
+          }
+        />
+
+        <Route
+          path="/cloth/:id"
+          element={
+            <ProtectedWrap
+              element={
+                <MainLayOut>
+                  <SingleCloth />
                 </MainLayOut>
               }
             ></ProtectedWrap>
