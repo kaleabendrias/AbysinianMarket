@@ -1,15 +1,22 @@
 require("dotenv").config();
 const axios = require("axios");
 const Clothing = require("../models/Clothing");
+const Accessories = require("../models/Accessories");
 
 const CHAPA_AUTH_KEY = process.env.CHAPA_AUTH_KEY;
 exports.buy = async (req, res) => {
-  const { id } = req.body;
+  const { id, type } = req.body;
   console.log(id);
   const tx_ref = `${Date.now()}-${Math.floor(Math.random() * 1000)}`;
   const currency = "ETB";
-  const cloth = await Clothing.findById(id);
-  amount = cloth.price;
+  if (type === "clothing") {
+    item = await Clothing.findById(id);
+  } else if (type === "accessory") {
+    item = await Accessories.findById(id);
+  } else {
+    return res.status(400).json({ message: "Invalid item type" });
+  }
+  amount = item.price;
   try {
     const header = {
       headers: {

@@ -73,8 +73,8 @@ const SellForm = () => {
               onChange={(e) => setSelectedType(e.target.value)}
             >
               <option value="">Select Type</option>
-              <option value="Silk">Silk</option>
-              <option value="?">?</option>
+              <option value="clothing">clothing</option>
+              <option value="accessories">Accessories</option>
               <option value="others">others</option>
             </select>
           </div>

@@ -39,6 +39,7 @@ const Signin = () => {
       .then((response) => {
         console.log(response);
         navigate("/protected");
+        window.location.reload();
       })
       .catch((err) => {
         console.log(err);

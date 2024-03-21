@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { FaSpinner } from "react-icons/fa";
 import axios from "axios";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 
 const ChangePassword = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -9,6 +9,7 @@ const ChangePassword = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,6 +26,7 @@ const ChangePassword = () => {
         { password, verificationToken }
       );
       setMessage(response.data.message);
+      navigate("/signin");
     } catch (error) {
       setMessage("An error occurred. Please try again later.");
       console.log(error);

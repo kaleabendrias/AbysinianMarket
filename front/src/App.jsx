@@ -14,6 +14,7 @@ import BuyForm from "./components/BuyForm";
 import SingleCloth from "./components/SingleCloth";
 import ForgotPassword from "./components/ForgotPassword";
 import ChangePassword from "./components/ChangePassword";
+import Accessories from "./components/Accessories";
 
 function App() {
   return (
@@ -99,6 +100,18 @@ function App() {
               element={
                 <MainLayOut>
                   <Clothing />
+                </MainLayOut>
+              }
+            ></ProtectedWrap>
+          }
+        />
+        <Route
+          path="/accessories"
+          element={
+            <ProtectedWrap
+              element={
+                <MainLayOut>
+                  <Accessories />
                 </MainLayOut>
               }
             ></ProtectedWrap>

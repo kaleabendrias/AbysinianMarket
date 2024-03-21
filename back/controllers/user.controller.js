@@ -4,7 +4,7 @@ require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const multer = require("multer");
-const Property = require("../models/Property");
+const Accessories = require("../models/Accessories");
 const Clothing = require("../models/Clothing");
 const Vehicle = require("../models/Vehicle");
 
@@ -315,7 +315,7 @@ exports.sell = async (req, res) => {
       }
 
       // Access form data (text fields) from req.body
-      const type = "clothing";
+      const type = req.body.type;
       const description = req.body.description; // Corrected typo
       const price = req.body.price;
       const size = req.body.size;
@@ -336,15 +336,15 @@ exports.sell = async (req, res) => {
           images,
         });
         await newVehicle.save();
-      } else if (type === "property") {
-        const newProperty = new Property({
+      } else if (type === "accessories") {
+        const newAccessories = new Accessories({
           // ... property specific properties ...
+          type,
           description,
           price,
-          size,
           images,
         });
-        await newProperty.save();
+        await newAccessories.save();
       } else if (type === "clothing") {
         const newClothing = new Clothing({
           type,

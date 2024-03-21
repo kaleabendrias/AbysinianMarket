@@ -2,14 +2,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const Clothing = () => {
+const Accessories = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const getClothes = async () => {
+    const getAccessories = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/shop/cloths"
+          "http://localhost:5000/api/shop/accessories"
         );
         setData(response.data);
       } catch (error) {
@@ -17,7 +17,7 @@ const Clothing = () => {
       }
     };
 
-    getClothes();
+    getAccessories();
   }, []);
 
   const handleBuy = async (e, id) => {
@@ -25,7 +25,7 @@ const Clothing = () => {
     try {
       const res = await axios.post(
         "http://localhost:5000/api/buy/",
-        { id, type: "clothing" },
+        { id, type: "accessory" },
         {
           withCredentials: true,
           headers: { "Content-Type": "application/json" },
@@ -42,7 +42,7 @@ const Clothing = () => {
 
   return (
     <div className="my-28 flex flex-wrap justify-center">
-      {data.map((clothingItem, index) => (
+      {data.map((accessoriesItem, index) => (
         <div
           className="group border-gray-100/30 flex w-full max-w-xs flex-col self-center overflow-hidden rounded-lg border bg-gray-700 shadow-md m-2"
           key={index}
@@ -51,10 +51,10 @@ const Clothing = () => {
             className="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl"
             href="#"
           >
-            {clothingItem.images.map((image, imageIndex) => (
+            {accessoriesItem.images.map((image, imageIndex) => (
               <Link
                 key={imageIndex}
-                to={`/cloth/${clothingItem._id}`}
+                to={`/accessories/${accessoriesItem._id}`}
                 className="inline-block max-w-xs m-2"
               >
                 <img
@@ -69,18 +69,18 @@ const Clothing = () => {
           <div className="mt-4 px-5 pb-5">
             <a href="#">
               <h5 className="text-xl tracking-tight text-white">
-                {clothingItem.type}
+                {accessoriesItem.type}
               </h5>
             </a>
             <div className="mt-2 mb-5 flex items-center justify-between">
               <p>
                 <span className="text-3xl font-bold text-white">
-                  {clothingItem.price}
+                  {accessoriesItem.price}
                 </span>
               </p>
             </div>
             <button
-              onClick={(e) => handleBuy(e, clothingItem._id)}
+              onClick={(e) => handleBuy(e, accessoriesItem._id)}
               className="hover:border-white/40 flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-blue-300"
             >
               <svg
@@ -101,4 +101,4 @@ const Clothing = () => {
   );
 };
 
-export default Clothing;
+export default Accessories;

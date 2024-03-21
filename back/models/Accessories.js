@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
-const propertySchema = new mongoose.Schema({
-  title: {
+const accessoriesSchema = new mongoose.Schema({
+  type: {
     type: String,
     required: true,
   },
@@ -15,16 +15,21 @@ const propertySchema = new mongoose.Schema({
   },
   location: {
     type: String,
+    required: false,
+  },
+  images: {
+    type: [String],
     required: true,
   },
   property_type: {
     type: String,
-    required: true,
+    required: false,
   },
   area: {
     type: Number,
+    required: false,
   },
   // ... You can add other property-specific fields here
 });
 
-module.exports = mongoose.model("Property", propertySchema);
+module.exports = mongoose.model("Accessory", accessoriesSchema);

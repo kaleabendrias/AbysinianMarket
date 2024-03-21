@@ -48,6 +48,7 @@ const Navbar = () => {
       .then((response) => {
         console.log(response);
         navigate("/signin");
+        window.location.reload();
       })
       .catch((err) => console.log(err));
   };
@@ -100,7 +101,7 @@ const Navbar = () => {
               <Link
                 to="/signin"
                 type="button"
-                className="hidden sm:flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg md:text-sm px-5 py-2.5 focus:outline-none"
+                className="flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg md:text-sm px-5 py-2.5 focus:outline-none"
               >
                 Signin
               </Link>
@@ -135,9 +136,33 @@ const Navbar = () => {
               isMenuOpen ? "block" : "hidden"
             } sm:hidden sm:items-center`}
           >
-            <div className="flex flex-col relative bg-slate-900 p-3 mt-2 rounded-lg bg-opacity-50">
-              <a className="">Home</a>
-              <a>About</a>
+            <div className="flex flex-col absolute right-1 top-6 bg-slate-900 p-3 mt-2 rounded-lg bg-opacity-80 text-xl">
+              <Link
+                to="/"
+                className={`text-white px-1 py-1 rounded ${
+                  location.pathname === "/" ? "bg-slate-800" : ""
+                }`}
+              >
+                Home
+              </Link>
+              <Link
+                to="/about"
+                className={`text-white px-1 py-1 rounded ${
+                  location.pathname === "/about" ? "bg-slate-800" : ""
+                }`}
+              >
+                About
+              </Link>
+              {isAuthenticated ? (
+                <Link
+                  to="/protected"
+                  className={`text-white px-1 py-1 rounded ${
+                    location.pathname === "/protected" ? "bg-slate-800" : ""
+                  }`}
+                >
+                  items
+                </Link>
+              ) : null}
             </div>
           </div>
         </div>

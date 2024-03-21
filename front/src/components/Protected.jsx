@@ -13,14 +13,16 @@ const Protected = () => {
         Market
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-        <div className="hover:w-[110%] hover:h-[110%] hover:z-10">
-          <img
-            src={image1}
-            className="w-full h-full max-h-[400px] rounded-xl object-cover"
-          />
-          <p className="text-center">Accessories</p>
-        </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <Link to="/accessories">
+          <div className="hover:w-[110%] hover:h-[110%] hover:z-10">
+            <img
+              src={image1}
+              className="w-full h-full max-h-[400px] rounded-xl object-cover"
+            />
+            <p className="text-center">Accessories</p>
+          </div>
+        </Link>
         <Link to="/cloths">
           <div className="hover:w-[110%] hover:h-[110%] hover:z-10 hover:text-xl">
             <img
@@ -30,12 +32,6 @@ const Protected = () => {
             <p className="text-center">Clothing</p>
           </div>
         </Link>
-        <div className="hover:w-[110%] hover:h-[110%] hover:z-10">
-          <img
-            src={image5}
-            className="w-full h-full max-h-[400px] rounded-xl object-cover"
-          />
-        </div>
       </div>
     </div>
   );
