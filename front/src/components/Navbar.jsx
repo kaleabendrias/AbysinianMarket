@@ -91,7 +91,7 @@ const Navbar = () => {
                   location.pathname === "/protected" ? "bg-slate-800" : ""
                 }`}
               >
-                Cloths
+                items
               </Link>
             ) : null}
           </div>

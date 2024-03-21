@@ -203,6 +203,106 @@ exports.logout = (req, res) => {
   });
 };
 
+exports.forgot = async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    // Find the user with the given email
+    const user = await User.findOne({ email });
+
+    // If user not found, return an error
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Generate a unique verification token
+    const verificationToken = jwt.sign(
+      { email: user.email },
+      process.env.JWT_SECRET,
+      { expiresIn: "1d" }
+    );
+
+    // Save the verification token and expiration time to the user document
+    user.resetPasswordToken = verificationToken;
+    user.resetPasswordExpires = Date.now() + 86400000; // Token expires in 1 day
+    await user.save();
+
+    // Send an email to the user containing a link with the verification token
+    const transporter = nodemailer.createTransport({
+      // Configure your email service here
+      // Example configuration for Gmail:
+      service: "gmail",
+      port: 465,
+      secure: true,
+      auth: {
+        user: process.env.EMAIL,
+        pass: process.env.PASSWORD,
+      },
+    });
+
+    const mailOptions = {
+      from: process.env.EMAIL,
+      to: user.email,
+      subject: "Password Reset",
+      html: `
+        <p>Hello ${user.name},</p>
+        <p>You have requested to reset your password. Please click the following link to reset your password:</p>
+        <a href="http://localhost:5173/reset-password?token=${verificationToken}">Reset Password</a>
+        <p>If you did not request this, please ignore this email and your password will remain unchanged.</p>
+      `,
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error(error);
+        return res
+          .status(500)
+          .json({ message: "Failed to send reset password email" });
+      }
+      console.log("Reset password email sent:", info.response);
+      res
+        .status(200)
+        .json({ message: "Reset password instructions sent to your email" });
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+exports.updatePassword = async (req, res) => {
+  const { verificationToken, password } = req.body;
+  const decoded = jwt.verify(verificationToken, process.env.JWT_SECRET);
+  const email = decoded.email;
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const decoded = jwt.verify(verificationToken, process.env.JWT_SECRET);
+
+    if (!decoded || !decoded.email || decoded.email !== user.email) {
+      return res
+        .status(401)
+        .json({ message: "Invalid token or mismatched user" });
+    }
+
+    // Hash the new password before updating it in the database
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Update the user's password
+    user.password = hashedPassword;
+    await user.save();
+
+    res.status(200).json({ message: "Password updated successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
 const upload = multer({ dest: "uploads/" });
 
 exports.sell = async (req, res) => {

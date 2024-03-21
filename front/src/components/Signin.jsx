@@ -93,9 +93,12 @@ const Signin = () => {
 
             <div className="flex justify-between items-center">
               <label className="font-thin text-xl m-2 ">password</label>
-              <a className="text-blue-700 font-semibold hover:text-blue-900">
+              <Link
+                to="/forgot"
+                className="text-blue-700 font-semibold hover:text-blue-900"
+              >
                 Forgot password?
-              </a>
+              </Link>
             </div>
             <input
               type={visible ? "text" : "password"}

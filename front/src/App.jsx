@@ -12,6 +12,8 @@ import SellForm from "./components/SellForm";
 import Clothing from "./components/Clothing";
 import BuyForm from "./components/BuyForm";
 import SingleCloth from "./components/SingleCloth";
+import ForgotPassword from "./components/ForgotPassword";
+import ChangePassword from "./components/ChangePassword";
 
 function App() {
   return (
@@ -47,6 +49,22 @@ function App() {
           element={
             <MainLayOut>
               <Signup />
+            </MainLayOut>
+          }
+        />
+        <Route
+          path="/forgot"
+          element={
+            <MainLayOut>
+              <ForgotPassword />
+            </MainLayOut>
+          }
+        />
+        <Route
+          path="/reset-password"
+          element={
+            <MainLayOut>
+              <ChangePassword />
             </MainLayOut>
           }
         />
