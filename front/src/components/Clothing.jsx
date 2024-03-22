@@ -44,18 +44,15 @@ const Clothing = () => {
     <div className="my-28 flex flex-wrap justify-center">
       {data.map((clothingItem, index) => (
         <div
-          className="group border-gray-100/30 flex w-full max-w-xs flex-col self-center overflow-hidden rounded-lg border bg-gray-700 shadow-md m-2"
+          className="border-gray-200 flex w-full max-w-xs flex-col self-center overflow-hidden rounded-lg border bg-white shadow-xl m-2"
           key={index}
         >
-          <a
-            className="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl"
-            href="#"
-          >
+          <a className="relative flex h-72 overflow-hidden" href="#">
             {clothingItem.images.map((image, imageIndex) => (
               <Link
                 key={imageIndex}
                 to={`/cloth/${clothingItem._id}`}
-                className="inline-block max-w-xs m-2"
+                className="inline-block w-full"
               >
                 <img
                   key={imageIndex}
@@ -67,21 +64,23 @@ const Clothing = () => {
             ))}
           </a>
           <div className="mt-4 px-5 pb-5">
-            <a href="#">
-              <h5 className="text-xl tracking-tight text-white">
-                {clothingItem.type}
-              </h5>
-            </a>
-            <div className="mt-2 mb-5 flex items-center justify-between">
-              <p>
-                <span className="text-3xl font-bold text-white">
-                  {clothingItem.price}
-                </span>
-              </p>
+            <div className="flex items-center justify-between my-4">
+              <a href="#">
+                <h5 className="text-sm w-20 text-center tracking-tight text-white bg-blue-900 rounded-full">
+                  {clothingItem.type}
+                </h5>
+              </a>
+              <div className=" flex items-center justify-between">
+                <p>
+                  <span className="text-xl font-bold text-black">
+                    {clothingItem.price} ETB
+                  </span>
+                </p>
+              </div>
             </div>
             <button
               onClick={(e) => handleBuy(e, clothingItem._id)}
-              className="hover:border-white/40 flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-blue-300"
+              className="hover:border-white/40 flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-blue-300 w-full"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

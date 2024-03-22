@@ -57,9 +57,7 @@ const Signup = () => {
             </p>
           )}
           <form className="flex flex-col">
-            <label className="text-md font-thin md:text-xl m-2">
-              user name
-            </label>
+            <label className="text-md font-thin md:text-xl ">user name</label>
             <input
               className="border border-gray-400 rounded-sm focus:outline-none focus:border-gray-600 p-1 m-2"
               type="text"

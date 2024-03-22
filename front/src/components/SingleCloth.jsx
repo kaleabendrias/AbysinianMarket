@@ -51,8 +51,8 @@ const SingleCloth = () => {
   }
 
   return (
-    <div className="my-28 flex flex-wrap justify-center">
-      <div className="group border-gray-100/30 flex w-full max-w-4xl self-center overflow-hidden rounded-lg border bg-gray-700 shadow-md m-2">
+    <div className="my-28 flex flex-wrap justify-center text-black">
+      <div className="group border-gray-100/30 flex w-full max-w-4xl self-center overflow-hidden rounded-lg border bg-white shadow-md m-2">
         <a
           className="relative mx-3 mt-3 flex h-full overflow-hidden rounded-xl"
           href="#"
@@ -73,20 +73,18 @@ const SingleCloth = () => {
           ))}
         </a>
         <div className="mt-4 px-5 pb-5 w-full h-full">
-          <a href="#">
-            <h5 className="text-xl tracking-tight text-white">
-              <span>size: </span>
-              {data.size}
-            </h5>
-          </a>
-          <div className="mt-2 mb-5 flex flex-col items-center justify-between">
+          <div className="mt-2 mb-5 flex flex-col space-y-3 justify-between">
             <p>
-              <span className="text-xl font-light text-white">
-                {data.description}
-              </span>
+              <span className="text-xl font-light ">{data.description}</span>
             </p>
+            <a href="#">
+              <h5 className="text-xl tracking-tight ">
+                <span>size: </span>
+                {data.size}
+              </h5>
+            </a>
             <p>
-              <span className="text-3xl font-bold text-white">
+              <span className="text-xl font-bold ">
                 <span>Price: </span>
                 {data.price} ETB
               </span>
@@ -94,7 +92,7 @@ const SingleCloth = () => {
           </div>
           <button
             onClick={handleBuy}
-            className="hover:border-white/40 flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-blue-300"
+            className="text-white hover:border-white/40 flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-5 py-2.5 text-center text-md font-medium  focus:outline-none focus:ring-4 focus:ring-blue-300"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

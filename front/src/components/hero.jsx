@@ -4,15 +4,10 @@
 // import image5 from "../assets/images/nordwood-themes-_sg8nXmpWDM-unsplash.jpg";
 import guts from "../assets/images/𝘽𝙀𝙍𝙎𝙀𝙍𝙆 ガッツ スマイル.jpeg";
 import eren from "../assets/images/Eren Yeager.jpeg";
-import image6 from "../assets/images/Beautiful Design Habesha Dress Habesha Kemis Design Habesha Libs.jpeg";
-import image7 from "../assets/images/Ethiopian Culture 🇪🇹.jpeg";
-import image8 from "../assets/images/Habesha Dress.jpeg";
-import image9 from "../assets/images/Habesha Style_Men Cloth_Habeshan T-Shirt and Trousers.jpeg";
-import image10 from "../assets/images/Mystic Elegance_ Dark Patterned Habesha Dress in Menen Fabric Habesha Kemis - XL.jpeg";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 
 export function SparklesPreview() {
   const [data, setData] = useState([]);
@@ -50,208 +45,86 @@ export function SparklesPreview() {
   }, []);
 
   return (
-    <>
-      <div className="h-[40rem] relative w-full bg-black flex flex-col items-center justify-center overflow-hidden rounded-md">
-        <div className="w-full absolute inset-0 h-screen"></div>
+    <div className="w-full">
+      <div
+        className="h-[40rem] overflow-hidden relative w-full flex flex-col items-center justify-center "
+        style={{
+          backgroundImage: "url('/tlfi1.jpeg')",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+
+          overflow: "hidden",
+        }}
+      >
+        <div
+          className="w-full absolute  h-full backdrop-filter backdrop-blur-xs"
+          style={{ backgroundColor: "rgba(0, 0, 0, 0.9)" }}
+        ></div>
         <h1 className="md:text-7xl text-3xl lg:text-6xl font-bold text-center text-white relative z-20">
-          <span className="font-mono">{text}</span>
+          <span className="font-mono text-white">{text}</span>
         </h1>
       </div>
 
-      <div className="my-8 grid grid-cols-3 bg-slate-200">
-        <div className="group border-gray-100/30 flex w-full max-w-sm flex-col self-center overflow-hidden rounded-lg border bg-gray-700 shadow-md m-2">
-          <a
-            className="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl"
-            href="#"
+      <div className="my-28 flex flex-wrap">
+        {data.slice(0, 4).map((clothingItem, index) => (
+          <div
+            className="border-gray-200 flex w-full max-w-xs flex-col self-center overflow-hidden rounded-lg border bg-white shadow-xl m-2"
+            key={index}
           >
-            <img
-              className="h-full w-full object-cover"
-              src={image6}
-              alt={`product image6`}
-            />
-          </a>
-          <div className="mt-4 px-5 pb-5">
-            <a href="#">
-              <h5 className="text-xl tracking-tight text-white">Silk</h5>
+            <a className="relative flex h-72 overflow-hidden" href="#">
+              {clothingItem.images.map((image, imageIndex) => (
+                <Link
+                  key={imageIndex}
+                  to={`/cloth/${clothingItem._id}`}
+                  className="inline-block w-full"
+                >
+                  <img
+                    key={imageIndex}
+                    className="h-full w-full object-cover"
+                    src={`http://localhost:5000/uploads/${image}`}
+                    alt={`product image ${imageIndex + 1}`}
+                  />
+                </Link>
+              ))}
             </a>
-            <div className="mt-2 mb-5 flex items-center justify-between">
-              <p>
-                <span className="text-3xl font-bold text-white">112</span>
-              </p>
-            </div>
-            <Link
-              to="/protected"
-              className="hover:border-white/40 flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-blue-300"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="mr-2 h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+            <div className="mt-4 px-5 pb-5">
+              <div className="flex items-center justify-between my-4">
+                <a href="#">
+                  <h5 className="text-sm w-20 text-center tracking-tight text-white bg-blue-900 rounded-full">
+                    {clothingItem.type}
+                  </h5>
+                </a>
+                <div className=" flex items-center justify-between">
+                  <p>
+                    <span className="text-xl font-bold text-black">
+                      {clothingItem.price} ETB
+                    </span>
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={(e) => handleBuy(e, clothingItem._id)}
+                className="hover:border-white/40 flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-blue-300 w-full"
               >
-                <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-              </svg>
-              Buy
-            </Link>
-          </div>
-        </div>
-
-        <div className="group border-gray-100/30 flex w-full max-w-sm flex-col self-center overflow-hidden rounded-lg border bg-gray-700 shadow-md m-2">
-          <a
-            className="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl"
-            href="#"
-          >
-            <img
-              className="h-full w-full object-cover"
-              src={image7}
-              alt={`product image6`}
-            />
-          </a>
-          <div className="mt-4 px-5 pb-5">
-            <a href="#">
-              <h5 className="text-xl tracking-tight text-white">Silk</h5>
-            </a>
-            <div className="mt-2 mb-5 flex items-center justify-between">
-              <p>
-                <span className="text-3xl font-bold text-white">112</span>
-              </p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="mr-2 h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+                Buy
+              </button>
             </div>
-            <Link
-              to="/protected"
-              className="hover:border-white/40 flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-blue-300"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="mr-2 h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-              </svg>
-              Buy
-            </Link>
           </div>
-        </div>
-        <div className="group border-gray-100/30 flex w-full max-w-sm flex-col self-center overflow-hidden rounded-lg border bg-gray-700 shadow-md m-2">
-          <a
-            className="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl"
-            href="#"
-          >
-            <img
-              className="h-full w-full object-cover"
-              src={image8}
-              alt={`product image6`}
-            />
-          </a>
-          <div className="mt-4 px-5 pb-5">
-            <a href="#">
-              <h5 className="text-xl tracking-tight text-white">Silk</h5>
-            </a>
-            <div className="mt-2 mb-5 flex items-center justify-between">
-              <p>
-                <span className="text-3xl font-bold text-white">112</span>
-              </p>
-            </div>
-            <Link
-              to="/protected"
-              className="hover:border-white/40 flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-blue-300"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="mr-2 h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-              </svg>
-              Buy
-            </Link>
-          </div>
-        </div>
-
-        <div className="group border-gray-100/30 flex w-full max-w-sm flex-col self-center overflow-hidden rounded-lg border bg-gray-700 shadow-md m-2">
-          <a
-            className="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl"
-            href="#"
-          >
-            <img
-              className="h-full w-full object-cover"
-              src={image9}
-              alt={`product image6`}
-            />
-          </a>
-          <div className="mt-4 px-5 pb-5">
-            <a href="#">
-              <h5 className="text-xl tracking-tight text-white">Silk</h5>
-            </a>
-            <div className="mt-2 mb-5 flex items-center justify-between">
-              <p>
-                <span className="text-3xl font-bold text-white">112</span>
-              </p>
-            </div>
-            <Link
-              to="/protected"
-              className="hover:border-white/40 flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-blue-300"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="mr-2 h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-              </svg>
-              Buy
-            </Link>
-          </div>
-        </div>
-
-        <div className="group border-gray-100/30 flex w-full max-w-sm flex-col self-center overflow-hidden rounded-lg border bg-gray-700 shadow-md m-2">
-          <a
-            className="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl"
-            href="#"
-          >
-            <img
-              className="h-full w-full object-cover"
-              src={image10}
-              alt={`product image6`}
-            />
-          </a>
-          <div className="mt-4 px-5 pb-5">
-            <a href="#">
-              <h5 className="text-xl tracking-tight text-white">Silk</h5>
-            </a>
-            <div className="mt-2 mb-5 flex items-center justify-between">
-              <p>
-                <span className="text-3xl font-bold text-white">112</span>
-              </p>
-            </div>
-            <Link
-              to="/protected"
-              className="hover:border-white/40 flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-blue-300"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="mr-2 h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-              </svg>
-              Buy
-            </Link>
-          </div>
-        </div>
+        ))}
       </div>
-      <div className="my-8">
+      <div className="m-16">
         <div className="flex flex-col md:flex-row items-center text-lg space-x-4">
           <motion.div
-            initial={{ x: -100 }}
+            initial={{ x: -10 }}
             whileInView={{ x: 1 }}
             transition={{ type: "spring", stiffness: 100, duration: 0.5 }}
           >
@@ -350,6 +223,6 @@ export function SparklesPreview() {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }

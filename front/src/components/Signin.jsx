@@ -108,7 +108,7 @@ const Signin = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
             <button
-              className="absolute bottom-[35%] right-3"
+              className="absolute bottom-[34%] right-4"
               type="button"
               onClick={() => setVisible(!visible)}
             >
