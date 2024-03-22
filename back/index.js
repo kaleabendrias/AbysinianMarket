@@ -14,6 +14,7 @@ const path = require("path");
 const authRoutes = require("./routes/AuthRoutes");
 const shopRoutes = require("./routes/ShopRoutes");
 const buyRoutes = require("./routes/BuyRoutes");
+const contactusRoutes = require("./routes/ContactusRoutes");
 
 require("dotenv").config();
 
@@ -105,6 +106,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/shop", shopRoutes);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api/buy", buyRoutes);
+app.use("/api/contactus", contactusRoutes);
 
 mongoose
   .connect(process.env.mongoURI, {

@@ -85,6 +85,14 @@ const Navbar = () => {
             >
               About
             </Link>
+            <Link
+              to="/contactus"
+              className={`text-white px-1 py-1 rounded ${
+                location.pathname === "/contactus" ? "bg-slate-800" : ""
+              }`}
+            >
+              Contact Us
+            </Link>
             {isAuthenticated ? (
               <Link
                 to="/protected"
@@ -152,6 +160,14 @@ const Navbar = () => {
                 }`}
               >
                 About
+              </Link>
+              <Link
+                to="/contactus"
+                className={`text-white px-1 py-1 rounded ${
+                  location.pathname === "/contactus" ? "bg-slate-800" : ""
+                }`}
+              >
+                Contact Us
               </Link>
               {isAuthenticated ? (
                 <Link

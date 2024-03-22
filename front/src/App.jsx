@@ -15,6 +15,7 @@ import SingleCloth from "./components/SingleCloth";
 import ForgotPassword from "./components/ForgotPassword";
 import ChangePassword from "./components/ChangePassword";
 import Accessories from "./components/Accessories";
+import ContactUs from "./components/ContactUs";
 
 function App() {
   return (
@@ -34,6 +35,14 @@ function App() {
           element={
             <MainLayOut>
               <About />
+            </MainLayOut>
+          }
+        />
+        <Route
+          path="/contactus"
+          element={
+            <MainLayOut>
+              <ContactUs />
             </MainLayOut>
           }
         />
