@@ -44,18 +44,15 @@ const Accessories = () => {
     <div className="my-28 flex flex-wrap justify-center">
       {data.map((accessoriesItem, index) => (
         <div
-          className="group border-gray-100/30 flex w-full max-w-xs flex-col self-center overflow-hidden rounded-lg border bg-gray-700 shadow-md m-2"
+          className="border-gray-200 flex w-full max-w-xs flex-col self-center overflow-hidden rounded-lg border bg-white shadow-xl m-2"
           key={index}
         >
-          <a
-            className="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl"
-            href="#"
-          >
+          <a className="relative flex h-72 overflow-hidden" href="#">
             {accessoriesItem.images.map((image, imageIndex) => (
               <Link
                 key={imageIndex}
                 to={`/accessories/${accessoriesItem._id}`}
-                className="inline-block max-w-xs m-2"
+                className="inline-block w-full"
               >
                 <img
                   key={imageIndex}
@@ -67,17 +64,19 @@ const Accessories = () => {
             ))}
           </a>
           <div className="mt-4 px-5 pb-5">
-            <a href="#">
-              <h5 className="text-xl tracking-tight text-white">
-                {accessoriesItem.type}
-              </h5>
-            </a>
-            <div className="mt-2 mb-5 flex items-center justify-between">
-              <p>
-                <span className="text-3xl font-bold text-white">
-                  {accessoriesItem.price}
-                </span>
-              </p>
+            <div className="flex items-center justify-between my-4">
+              <a href="#">
+                <h5 className="text-sm w-20 text-center tracking-tight text-white bg-blue-900 rounded-full">
+                  {accessoriesItem.type}
+                </h5>
+              </a>
+              <div className=" flex items-center justify-between">
+                <p>
+                  <span className="text-xl font-bold text-black">
+                    {accessoriesItem.price} ETB
+                  </span>
+                </p>
+              </div>
             </div>
             <button
               onClick={(e) => handleBuy(e, accessoriesItem._id)}
