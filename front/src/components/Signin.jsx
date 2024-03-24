@@ -68,7 +68,7 @@ const Signin = () => {
 
         <div className="mb-6">
           <a
-            href="http://localhost:5000/auth/google"
+            href="https://abysinianmarket.onrender.com/auth/google"
             className="mb-4 border border-gray-400 px-12 py-2 rounded-lg flex items-center bg-blue-700"
           >
             <FaGoogle width={32} style={{ color: "white" }}></FaGoogle>
