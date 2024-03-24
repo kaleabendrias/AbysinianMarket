@@ -81,7 +81,7 @@ export function SparklesPreview() {
                   <img
                     key={imageIndex}
                     className="h-full w-full object-cover"
-                    src={`http://localhost:5000/uploads/${image}`}
+                    src={image.url}
                     alt={`product image ${imageIndex + 1}`}
                   />
                 </Link>
@@ -181,7 +181,7 @@ export function SparklesPreview() {
                     <img
                       key={imageIndex}
                       className="h-full w-full object-cover"
-                      src={`http://localhost:5000/uploads/${image}`}
+                      src={image.url}
                       alt={`product image ${imageIndex + 1}`}
                     />
                   ))}
@@ -214,7 +214,7 @@ export function SparklesPreview() {
               {clothingItem.images.map((image, imageIndex) => (
                 <img
                   key={imageIndex}
-                  src={`http://localhost:5000/uploads/${image}`}
+                  src={image.url}
                   alt={image.alt}
                   className="inline-block max-w-xs m-2"
                 />
