@@ -1,6 +1,5 @@
 import image1 from "../assets/images/anh-nhat-YKFBdV-RRXI-unsplash.jpg";
 import image2 from "../assets/images/domino-164_6wVEHfI-unsplash.webp";
-import image5 from "../assets/images/faith-yarn-Wr0TpKqf26s-unsplash.webp";
 import { Link } from "react-router-dom";
 
 const Protected = () => {
