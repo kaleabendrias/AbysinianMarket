@@ -42,7 +42,7 @@ const Navbar = () => {
   const handleSignout = (e) => {
     e.preventDefault;
     axios
-      .get("http://localhost:5000/api/auth/logout", {
+      .get("https://abysinianmarket.onrender.com/api/auth/logout", {
         withCredentials: true,
       })
       .then((response) => {
