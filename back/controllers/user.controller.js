@@ -323,8 +323,8 @@ exports.sell = async (req, res) => {
       const type = req.body.type;
       const description = req.body.description; // Corrected typo
       const price = req.body.price;
-      const size = req.body.size;
-      const color = req.body.color;
+      const size = req.body.size || undefined;
+      const color = req.body.color || undefined;
 
       // Access uploaded images from req.files (array)
       const images = req.files; // Assuming filenames are stored

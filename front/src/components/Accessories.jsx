@@ -9,7 +9,7 @@ const Accessories = () => {
     const getAccessories = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/shop/accessories"
+          "https://abysinianmarket.onrender.com/api/shop/accessories"
         );
         setData(response.data);
       } catch (error) {
