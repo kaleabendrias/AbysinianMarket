@@ -97,7 +97,11 @@ app.get(
     );
 
     delete user.password; // Remove the password before sending it to user
-    res.cookie("jwt", token, { secure: false });
+    res.cookie("jwt", token, {
+      secure: true,
+      httpOnly: false,
+      sameSite: "none",
+    });
     res.redirect("https://abysinian-market.vercel.app/protected");
   }
 );
