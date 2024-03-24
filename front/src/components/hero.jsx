@@ -65,7 +65,7 @@ export function SparklesPreview() {
         </h1>
       </div>
 
-      <div className="my-28 flex flex-wrap">
+      <div className="m-28 flex flex-wrap">
         {data.slice(0, 4).map((clothingItem, index) => (
           <div
             className="border-gray-200 flex w-full max-w-xs flex-col self-center overflow-hidden rounded-lg border bg-white shadow-xl m-2"
@@ -180,7 +180,7 @@ export function SparklesPreview() {
                   {clothingItem.images.map((image, imageIndex) => (
                     <img
                       key={imageIndex}
-                      className="h-full w-full object-cover"
+                      className="w-full h-[600px] object-cover"
                       src={image.url}
                       alt={`product image ${imageIndex + 1}`}
                     />
@@ -205,18 +205,19 @@ export function SparklesPreview() {
         </div>
       </div>
 
-      <div className="">
-        <p className="text-4xl font-bold ml-4">Dress</p>
+      <div className="m-14">
+        <p className="text-4xl font-bold">Dress</p>
 
         <div className="flex overflow-x-auto">
           {data.map((clothingItem, index) => (
-            <div key={index} className="flex">
+            <div key={index} className="flex space-x-2">
               {clothingItem.images.map((image, imageIndex) => (
                 <img
                   key={imageIndex}
                   src={image.url}
                   alt={image.alt}
-                  className="inline-block max-w-xs m-2"
+                  className="inline-block m-2 max-w-full"
+                  style={{ maxWidth: "400px", maxHeight: "400px" }}
                 />
               ))}
             </div>

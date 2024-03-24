@@ -45,7 +45,7 @@ const About = () => {
       </div>
       <div className="flex flex-col space-y-10">
         <div className="flex flex-col justify-center items-center mt-16">
-          <p className="text-3xl text-center w-[80%] mb-8">
+          <p className="text-3xl text-center w-full mb-8">
             Your Ultimate Shopping Destination! Explore a world of endless
             possibilities with{" "}
             <span className="font-bold text-blue-600 font-mono">
