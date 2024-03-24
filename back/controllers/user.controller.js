@@ -39,7 +39,11 @@ exports.signin = async (req, res) => {
       { expiresIn: "1h" }
     );
     // Return response with token
-    res.cookie("jwt", token, { secure: true });
+    res.cookie("jwt", token, {
+      secure: true,
+      httpOnly: false,
+      sameSite: "none",
+    });
     res.status(200).send({ token, ...user._doc });
   } catch (err) {
     console.log(err);
