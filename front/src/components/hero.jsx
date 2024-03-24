@@ -19,7 +19,7 @@ export function SparklesPreview() {
     const getClothes = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/shop/cloths"
+          "https://abysinianmarket.onrender.com/api/shop/cloths"
         );
         setData(response.data);
       } catch (error) {

@@ -9,7 +9,7 @@ const Clothing = () => {
     const getClothes = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/shop/cloths"
+          "https://abysinianmarket.onrender.com/api/shop/cloths"
         );
         setData(response.data);
       } catch (error) {
@@ -24,7 +24,7 @@ const Clothing = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/buy/",
+        "https://abysinianmarket.onrender.com/api/buy/",
         { id, type: "clothing" },
         {
           withCredentials: true,

@@ -11,7 +11,7 @@ const SingleCloth = () => {
     const getClothes = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/shop/cloth/${id}`
+          `https://abysinianmarket.onrender.com/api/shop/cloth/${id}`
         );
         setData(response.data);
         setLoading(false); // Set loading to false after data is fetched
@@ -31,7 +31,7 @@ const SingleCloth = () => {
     e.preventDefault;
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/buy/",
+        "https://abysinianmarket.onrender.com/api/buy/",
         { id },
         { withCredentials: true },
         {

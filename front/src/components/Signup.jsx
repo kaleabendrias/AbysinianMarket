@@ -14,7 +14,7 @@ const Signup = () => {
     e.preventDefault();
     axios
       .post(
-        "http://localhost:5000/api/auth/signup",
+        "https://abysinianmarket.onrender.com/api/auth/signup",
         {
           email,
           name,

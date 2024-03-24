@@ -22,7 +22,7 @@ const ChangePassword = () => {
     }
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/updatePassword",
+        "https://abysinianmarket.onrender.com/api/auth/updatePassword",
         { password, verificationToken }
       );
       setMessage(response.data.message);

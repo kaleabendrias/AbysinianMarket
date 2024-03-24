@@ -20,7 +20,7 @@ const BuyForm = () => {
     try {
       setLoading(true);
       const res = await axios.post(
-        "http://localhost:5000/api/buy/",
+        "https://abysinianmarket.onrender.com/api/buy/",
         {
           // amount,
           currency,

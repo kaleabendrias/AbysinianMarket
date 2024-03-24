@@ -16,7 +16,7 @@ const ContactUs = () => {
     setLoading(true);
     axios
       .post(
-        "http://localhost:5000/api/contactus/",
+        "https://abysinianmarket.onrender.com/api/contactus/",
         {
           email,
           subject,

@@ -34,7 +34,7 @@ const SellForm = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/sell",
+        "https://abysinianmarket.onrender.com/api/auth/sell",
         formData,
         {
           headers: {
