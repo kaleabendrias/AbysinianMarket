@@ -66,7 +66,7 @@ const SingleCloth = () => {
               <img
                 key={imageIndex}
                 className="h-full w-full object-cover"
-                src={`http://localhost:5000/uploads/${image}`}
+                src={image.url}
                 alt={`product image ${imageIndex + 1}`}
               />
             </Link>
