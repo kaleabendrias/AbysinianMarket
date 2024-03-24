@@ -327,7 +327,7 @@ exports.sell = async (req, res) => {
       const color = req.body.color;
 
       // Access uploaded images from req.files (array)
-      const images = req.files.map((file) => file.filename); // Assuming filenames are stored
+      const images = req.files; // Assuming filenames are stored
 
       // ... save data based on type using your models ...
       const imageUrls = await Promise.all(
