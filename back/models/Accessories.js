@@ -17,10 +17,12 @@ const accessoriesSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  images: {
-    public_id: { type: String, required: true },
-    url: { type: String, required: true },
-  },
+  images: [
+    {
+      public_id: { type: String, required: true },
+      url: { type: String, required: true },
+    },
+  ],
   property_type: {
     type: String,
     required: false,
