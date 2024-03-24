@@ -28,7 +28,7 @@ exports.buy = async (req, res) => {
       amount,
       currency: currency,
       tx_ref: tx_ref,
-      return_url: "http://localhost:5173/", // Set your return URL
+      return_url: "https://abysinian-market.vercel.app/", // Set your return URL
     };
     let resp = "";
     await axios

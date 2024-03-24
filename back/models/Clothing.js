@@ -19,10 +19,12 @@ const clothingSchema = new mongoose.Schema({
   color: {
     type: String,
   },
-  images: {
-    type: [String],
-    required: true,
-  },
+  images: [
+    {
+      public_id: { type: String, required: true },
+      url: { type: String, required: true },
+    },
+  ],
 });
 
 module.exports = mongoose.model("Clothing", clothingSchema);

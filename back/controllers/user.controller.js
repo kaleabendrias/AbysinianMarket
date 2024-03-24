@@ -7,6 +7,7 @@ const multer = require("multer");
 const Accessories = require("../models/Accessories");
 const Clothing = require("../models/Clothing");
 const Vehicle = require("../models/Vehicle");
+const cloudinary = require("../utils/cloudinary");
 
 exports.signin = async (req, res) => {
   const { email, password } = req.body;
@@ -329,7 +330,14 @@ exports.sell = async (req, res) => {
       const images = req.files.map((file) => file.filename); // Assuming filenames are stored
 
       // ... save data based on type using your models ...
-
+      const imageUrls = await Promise.all(
+        images.map(async (image) => {
+          const result = await cloudinary.uploader.upload(image.path, {
+            folder: "products",
+          });
+          return { public_id: result.public_id, url: result.secure_url };
+        })
+      );
       if (type === "vehicle") {
         const newVehicle = new Vehicle({
           // ... vehicle specific properties ...
@@ -337,7 +345,7 @@ exports.sell = async (req, res) => {
           price,
           size,
           color,
-          images,
+          image: imageUrls,
         });
         await newVehicle.save();
       } else if (type === "accessories") {
@@ -346,7 +354,7 @@ exports.sell = async (req, res) => {
           type,
           description,
           price,
-          images,
+          image: imageUrls,
         });
         await newAccessories.save();
       } else if (type === "clothing") {
@@ -356,7 +364,7 @@ exports.sell = async (req, res) => {
           price,
           color,
           size,
-          images,
+          image: imageUrls,
         });
         await newClothing.save();
       }
