@@ -1,4 +1,4 @@
-import image1 from "../assets/images/anh-nhat-YKFBdV-RRXI-unsplash.jpg";
+import image1 from "../assets/images/anh-nhat-YKFBdV-RRXI-unsplash.jpeg";
 import image2 from "../assets/images/domino-164_6wVEHfI-unsplash.webp";
 import { Link } from "react-router-dom";
 

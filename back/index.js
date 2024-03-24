@@ -43,7 +43,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.CLIENTSECRET,
-      callbackURL: "http://localhost:5000/auth/google/callback",
+      callbackURL: "https://abysinianmarket.onrender.com/auth/google/callback",
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
@@ -98,7 +98,7 @@ app.get(
 
     delete user.password; // Remove the password before sending it to user
     res.cookie("jwt", token, { secure: false });
-    res.redirect("http://localhost:5173/protected");
+    res.redirect("https://abysinian-market.vercel.app/protected");
   }
 );
 
