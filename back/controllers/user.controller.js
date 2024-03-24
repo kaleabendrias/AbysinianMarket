@@ -352,7 +352,7 @@ exports.sell = async (req, res) => {
           price,
           size,
           color,
-          image: imageUrls,
+          images: imageUrls,
         });
         await newVehicle.save();
       } else if (type === "accessories") {
@@ -361,7 +361,7 @@ exports.sell = async (req, res) => {
           type,
           description,
           price,
-          image: imageUrls,
+          images: imageUrls,
         });
         await newAccessories.save();
       } else if (type === "clothing") {
@@ -371,7 +371,7 @@ exports.sell = async (req, res) => {
           price,
           color,
           size,
-          image: imageUrls,
+          images: imageUrls,
         });
         await newClothing.save();
       }
