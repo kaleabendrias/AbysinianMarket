@@ -333,7 +333,7 @@ exports.sell = async (req, res) => {
       const imageUrls = await Promise.all(
         images.map(async (image) => {
           try {
-            const result = await cloudinary.uploader.upload(image, {
+            const result = await cloudinary.uploader.upload(image.path, {
               folder: "products",
             });
             return { public_id: result.public_id, url: result.secure_url };
