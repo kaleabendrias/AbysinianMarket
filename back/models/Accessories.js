@@ -23,15 +23,6 @@ const accessoriesSchema = new mongoose.Schema({
       url: { type: String, required: true },
     },
   ],
-  property_type: {
-    type: String,
-    required: false,
-  },
-  area: {
-    type: Number,
-    required: false,
-  },
-  // ... You can add other property-specific fields here
 });
 
 module.exports = mongoose.model("Accessory", accessoriesSchema);

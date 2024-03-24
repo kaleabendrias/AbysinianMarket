@@ -4,7 +4,7 @@ require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const multer = require("multer");
-const Accessories = require("../models/Accessories");
+const Accessory = require("../models/Accessories");
 const Clothing = require("../models/Clothing");
 const Vehicle = require("../models/Vehicle");
 const cloudinary = require("../utils/cloudinary");
@@ -356,14 +356,15 @@ exports.sell = async (req, res) => {
         });
         await newVehicle.save();
       } else if (type === "accessories") {
-        const newAccessories = new Accessories({
+        console.log("hahaha", imageUrls);
+        const newAccessory = new Accessory({
           // ... property specific properties ...
           type,
           description,
           price,
           images: imageUrls,
         });
-        await newAccessories.save();
+        await newAccessory.save();
       } else if (type === "clothing") {
         const newClothing = new Clothing({
           type,
