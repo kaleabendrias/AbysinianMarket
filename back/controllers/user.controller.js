@@ -332,10 +332,15 @@ exports.sell = async (req, res) => {
       // ... save data based on type using your models ...
       const imageUrls = await Promise.all(
         images.map(async (image) => {
-          const result = await cloudinary.uploader.upload(image.path, {
-            folder: "products",
-          });
-          return { public_id: result.public_id, url: result.secure_url };
+          try {
+            const result = await cloudinary.uploader.upload(image.path, {
+              folder: "products",
+            });
+            return { public_id: result.public_id, url: result.secure_url };
+          } catch (uploadError) {
+            console.error("Error uploading image to Cloudinary:", uploadError);
+            throw uploadError; // Rethrow the error to trigger catch block below
+          }
         })
       );
       if (type === "vehicle") {
