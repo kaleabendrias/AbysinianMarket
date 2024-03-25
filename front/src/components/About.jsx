@@ -1,10 +1,10 @@
-import image1 from "../assets/images/𝗡𝗮𝗴𝗮𝘁𝗼.jpeg";
+import image1 from "../assets/images/DIVERSITY OF AFRICAN PEOPLE.jpeg";
 import { FaHandshake, FaHistory } from "react-icons/fa";
 import { GoGoal } from "react-icons/go";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import guts from "../assets/images/𝘽𝙀𝙍𝙎𝙀𝙍𝙆 ガッツ スマイル.jpeg";
-import eren from "../assets/images/Eren Yeager.jpeg";
+import guts from "../assets/images/This Person Does Not Exist.jpeg";
+import eren from "../assets/images/Beyond the Surface_ AI Face Portraits.jpeg";
 
 const About = () => {
   const [text, setText] = useState("");
@@ -43,7 +43,7 @@ const About = () => {
           <span className="font-mono">{text}</span>
         </h1>
       </div>
-      <div className="flex flex-col space-y-10">
+      <div className="flex flex-col space-y-10 mb-16">
         <div className="flex flex-col justify-center items-center mt-16">
           <p className="text-3xl text-center w-full mb-8">
             Your Ultimate Shopping Destination! Explore a world of endless
@@ -60,9 +60,9 @@ const About = () => {
             products for you. Elevate your shopping experience and discover new
             treasures every day at AbyssiniaMarket!&ldquo;
           </p>
-          <div className="flex flex-col md:flex-row items-center justify-center space-x-4">
-            <div className="m-8">
-              <div className="flex items-center space-x-4">
+          <div className="flex flex-col md:flex-row items-center justify-center space-x-4 m-16">
+            <div className="">
+              <div className="flex items-center space-x-4 w-full">
                 <FaHistory size={30} style={{ color: "darkBlue" }} />
                 <p className="text-2xl font-bold text-blue-700">Our story</p>
               </div>
@@ -101,13 +101,13 @@ const About = () => {
             tempora impedit minus sapiente, facilis facere dolore iure quasi
             nesciunt, aperiam reiciendis corrupti.
           </p>
-          <img src={image1} className="rounded-full w-20 h-20" />
+          <img src={image1} className="rounded-full w-24 h-24" />
           <a href="https://github.com/kaleabendrias">
             <p className="text-blue-600 font-bold">Kaleab Endrias</p>
           </a>
           <p className="">Developer</p>
         </div>
-        <div className="my-8">
+        <div className="m-16">
           <div className="flex flex-col md:flex-row items-center text-lg space-x-4">
             <motion.div
               initial={{ x: -100 }}
