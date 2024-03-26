@@ -185,12 +185,18 @@ export function SparklesPreview() {
                   >
                     <div className="max-w-xl relative">
                       {clothingItem.images.map((image, imageIndex) => (
-                        <img
+                        <Link
                           key={imageIndex}
-                          className="w-full h-[600px] object-cover"
-                          src={image.url}
-                          alt={`product image ${imageIndex + 1}`}
-                        />
+                          to={`/cloth/${clothingItem._id}`}
+                          className="inline-block w-full"
+                        >
+                          <img
+                            key={imageIndex}
+                            className="w-full h-[400px] object-cover"
+                            src={image.url}
+                            alt={`product image ${imageIndex + 1}`}
+                          />
+                        </Link>
                       ))}
                       <p className="w-full mb-16 absolute bottom-3 text-lg text-black font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white bg-opacity-40 rounded-lg p-2">
                         {clothingItem.description}
@@ -212,7 +218,7 @@ export function SparklesPreview() {
             </div>
           </div>
         ) : (
-          <FaSpinner className="w-full flex justify-center animate-spin ml-4 text-center text-8xl" />
+          <FaSpinner className="my-28 w-full flex justify-center animate-spin ml-4 text-center text-8xl" />
         )}
       </div>
 
@@ -238,7 +244,7 @@ export function SparklesPreview() {
             </div>
           </div>
         ) : (
-          <FaSpinner className="w-full flex justify-center animate-spin ml-4 text-center text-8xl" />
+          <FaSpinner className="my-28 w-full flex justify-center animate-spin ml-4 text-center text-8xl" />
         )}
       </div>
       <div className="m-14">
@@ -263,7 +269,7 @@ export function SparklesPreview() {
             </div>
           </div>
         ) : (
-          <FaSpinner className="w-full flex justify-center animate-spin ml-4 text-center text-8xl" />
+          <FaSpinner className="my-28 w-full flex justify-center animate-spin ml-4 text-center text-8xl" />
         )}
       </div>
     </div>

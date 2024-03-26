@@ -1,48 +1,13 @@
 import image1 from "../assets/images/DIVERSITY OF AFRICAN PEOPLE.jpeg";
 import { FaHandshake, FaHistory } from "react-icons/fa";
 import { GoGoal } from "react-icons/go";
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import guts from "../assets/images/This Person Does Not Exist.jpeg";
 import eren from "../assets/images/Beyond the Surface_ AI Face Portraits.jpeg";
 
 const About = () => {
-  const [text, setText] = useState("");
-  const fullText = "AbysiniaMarket - Your Ultimate Shopping Destination!";
-  const typingSpeed = 50;
-
-  useEffect(() => {
-    let currentIndex = 0;
-    const interval = setInterval(() => {
-      if (currentIndex <= fullText.length) {
-        setText(fullText.substring(0, currentIndex));
-        currentIndex++;
-      } else {
-        clearInterval(interval);
-      }
-    }, typingSpeed);
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <>
-      <div className="h-[40rem] relative w-full bg-black flex flex-col items-center justify-center overflow-hidden rounded-md">
-        <div className="w-full absolute inset-0 h-screen">
-          {/* <SparklesCore
-            id="tsparticlesfullpage"
-            background="transparent"
-            minSize={0.6}
-            maxSize={1.4}
-            particleDensity={100}
-            className="w-full h-full"
-            particleColor="#FFFFFF"
-          /> */}
-        </div>
-        <h1 className="md:text-7xl text-3xl lg:text-6xl font-bold text-center text-white relative z-20">
-          <span className="font-mono">{text}</span>
-        </h1>
-      </div>
+    <div className="mt-28">
       <div className="flex flex-col space-y-10 mb-16">
         <div className="flex flex-col justify-center items-center mt-16">
           <p className="text-3xl text-center w-full mb-8">
@@ -153,7 +118,7 @@ const About = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
