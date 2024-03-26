@@ -1,14 +1,16 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import { FaSpinner } from "react-icons/fa";
 
 const SingleCloth = () => {
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
     const getClothes = async () => {
+      setLoading(true);
       try {
         const response = await axios.get(
           `https://abysinianmarket.onrender.com/api/shop/cloth/${id}`
@@ -47,7 +49,12 @@ const SingleCloth = () => {
   };
 
   if (loading) {
-    return <div className="mt-28">Loading...</div>; // Render a loading indicator while fetching data
+    return (
+      <div className="h-screen flex items-center">
+        {" "}
+        <FaSpinner className="w-full flex justify-center animate-spin ml-4 text-center text-8xl" />
+      </div>
+    ); // Render a loading indicator while fetching data
   }
 
   return (
