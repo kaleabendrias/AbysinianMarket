@@ -4,27 +4,43 @@ import { GoGoal } from "react-icons/go";
 import { motion } from "framer-motion";
 import guts from "../assets/images/This Person Does Not Exist.jpeg";
 import eren from "../assets/images/Beyond the Surface_ AI Face Portraits.jpeg";
+import image2 from "../assets/images/Ethiopian Culture 🇪🇹.jpeg";
 
 const About = () => {
   return (
     <div className="mt-28">
-      <div className="flex flex-col space-y-10 mb-16">
-        <div className="flex flex-col justify-center items-center mt-16">
-          <p className="text-3xl text-center w-full mb-8">
-            Your Ultimate Shopping Destination! Explore a world of endless
-            possibilities with{" "}
-            <span className="font-bold text-blue-600 font-mono">
-              AbyssiniaMarket
-            </span>
-            , where you&apos;ll find everything you need and more.
-          </p>
-          <p className="w-[90%] text-2xl mt-4 font-thin mb-12">
-            From trendy fashion to the latest gadgets, from gourmet foods to
-            everyday essentials, we&apos;ve got it all. Shop with confidence and
-            convenience, knowing that AbyssiniaMarket has curated the best
-            products for you. Elevate your shopping experience and discover new
-            treasures every day at AbyssiniaMarket!&ldquo;
-          </p>
+      <div className="flex flex-col space-y-4">
+        <p className="font-bold text-2xl mx-16 text-center text-blue-600">
+          About Us
+        </p>
+        <div className="flex flex-col justify-center items-center mt-8">
+          <div className="flex items-center justify-center space-x-10 mx-16 mt-4">
+            <motion.div
+              className="w-full"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+            >
+              <img src={image2} className="w-80" />
+            </motion.div>
+            <div>
+              <p className="text-3xl text-center w-full mb-8">
+                Your Ultimate Shopping Destination! Explore a world of endless
+                possibilities with{" "}
+                <span className="font-bold text-blue-600 font-mono">
+                  AbyssiniaMarket
+                </span>
+                , where you&apos;ll find everything you need and more.
+              </p>
+              <p className="w-[90%] text-2xl mt-4 font-thin mb-12">
+                From trendy fashion to the latest gadgets, from gourmet foods to
+                everyday essentials, we&apos;ve got it all. Shop with confidence
+                and convenience, knowing that AbyssiniaMarket has curated the
+                best products for you. Elevate your shopping experience and
+                discover new treasures every day at AbyssiniaMarket!&ldquo;
+              </p>
+            </div>
+          </div>
           <div className="flex flex-col md:flex-row items-center justify-center space-x-4 m-16">
             <div className="">
               <div className="flex items-center space-x-4 w-full">

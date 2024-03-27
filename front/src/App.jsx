@@ -16,6 +16,7 @@ import ForgotPassword from "./components/ForgotPassword";
 import ChangePassword from "./components/ChangePassword";
 import Accessories from "./components/Accessories";
 import ContactUs from "./components/ContactUs";
+import SingleAccessory from "./components/SingleAccessory";
 
 function App() {
   return (
@@ -146,6 +147,18 @@ function App() {
               element={
                 <MainLayOut>
                   <SingleCloth />
+                </MainLayOut>
+              }
+            ></ProtectedWrap>
+          }
+        />
+        <Route
+          path="/accessory/:id"
+          element={
+            <ProtectedWrap
+              element={
+                <MainLayOut>
+                  <SingleAccessory />
                 </MainLayOut>
               }
             ></ProtectedWrap>

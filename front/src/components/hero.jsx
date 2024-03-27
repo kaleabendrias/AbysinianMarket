@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { FaSpinner } from "react-icons/fa";
+import image1 from "../assets/images/Ethiopian clothe_ Ethiopian handmade cotton scarf, Ethiopian shawl, Cotton scarf,Ethiopian dress, habesha dress, habesha kemis, Rasta clothe.jpeg";
 
 export function SparklesPreview() {
   const [data, setData] = useState([]);
@@ -107,6 +108,38 @@ export function SparklesPreview() {
         <h1 className="md:text-7xl text-3xl lg:text-6xl font-bold text-center text-white relative z-20">
           <span className="font-mono text-white">{text}</span>
         </h1>
+      </div>
+
+      <div className="relative">
+        <img className="h-screen w-screen" src={image1} />
+        <motion.div
+          className="absolute left-3 inset-y-0 w-full"
+          initial={{ x: -200 }}
+          whileInView={{ x: 0 }}
+          transition={{
+            type: "spring",
+            stiffness: 100,
+            damping: 30,
+          }}
+        >
+          <div className="absolute left-3 inset-y-0 flex items-center text-black text-4xl md:text-8xl font-bold px-4 font-mono">
+            Feel the
+          </div>
+        </motion.div>
+        <motion.div
+          className="absolute right-3 inset-y-6 w-full"
+          initial={{ x: -200 }}
+          whileInView={{ x: 0 }}
+          transition={{
+            type: "spring",
+            stiffness: 100,
+            damping: 30,
+          }}
+        >
+          <div className="font-mono absolute right-3 inset-y-6 flex items-center text-black text-4xl md:text-8xl font-bold px-4">
+            magic
+          </div>
+        </motion.div>
       </div>
 
       <div className="m-16">
@@ -228,7 +261,7 @@ export function SparklesPreview() {
             <p className="text-4xl font-bold">Dress</p>
 
             <div className="flex overflow-x-auto">
-              {data.map((clothingItem, index) => (
+              {data.slice(0, 6).map((clothingItem, index) => (
                 <div key={index} className="flex space-x-2">
                   {clothingItem.images.map((image, imageIndex) => (
                     <img
@@ -256,13 +289,14 @@ export function SparklesPreview() {
               {data1.slice(0, 6).map((accessoryItem, index) => (
                 <div key={index} className="flex space-x-2">
                   {accessoryItem.images.map((image, imageIndex) => (
-                    <img
-                      key={imageIndex}
-                      src={image.url}
-                      alt={image.alt}
-                      className="inline-block m-2 max-w-full"
-                      style={{ maxWidth: "400px", maxHeight: "400px" }}
-                    />
+                    <Link to="/accessories" key={imageIndex}>
+                      <img
+                        src={image.url}
+                        alt={image.alt}
+                        className="inline-block m-2 max-w-full"
+                        style={{ maxWidth: "400px", maxHeight: "400px" }}
+                      />
+                    </Link>
                   ))}
                 </div>
               ))}

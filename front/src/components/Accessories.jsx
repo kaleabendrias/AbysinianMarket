@@ -58,7 +58,7 @@ const Accessories = () => {
                 {accessoriesItem.images.map((image, imageIndex) => (
                   <Link
                     key={imageIndex}
-                    to={`/accessories/${accessoriesItem._id}`}
+                    to={`/accessory/${accessoriesItem._id}`}
                     className="inline-block w-full"
                   >
                     <img

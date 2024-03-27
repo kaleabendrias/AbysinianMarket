@@ -55,8 +55,8 @@ const Navbar = () => {
 
   return (
     <div className="">
-      <div className="fixed top-0 left-0 w-full z-50 p-6 bg-black text-white bg-opacity-90">
-        <div className="flex justify-between items-center px-16">
+      <div className="fixed top-0 w-full z-50 p-6 bg-black text-white bg-opacity-90">
+        <div className="px-0 flex justify-between items-center md:px-16">
           <div>
             <Link to="/">
               <p className="font-mono">
@@ -87,7 +87,7 @@ const Navbar = () => {
             </Link>
             <Link
               to="/contactus"
-              className={`text-white px-1 py-1 rounded ${
+              className={`text-white md:px-1 md:py-1 rounded ${
                 location.pathname === "/contactus" ? "bg-slate-800" : ""
               }`}
             >
@@ -114,7 +114,7 @@ const Navbar = () => {
                 Signin
               </Link>
             ) : (
-              <div className="flex justify-center space-x-2">
+              <div className="flex justify-center space-x-2 mr-4">
                 {isAdminUser && (
                   <Link
                     to="/sellform"
@@ -133,10 +133,10 @@ const Navbar = () => {
             )}
           </div>
         </div>
-        <div className="sm:flex sm:justify-between sm:space-x-4 text-lg absolute right-6 top-6">
+        <div className="sm:flex sm:justify-between sm:space-x-4 text-lg absolute right-1 top-8">
           <div className="sm:hidden flex items-center">
             <button onClick={toggleMenu}>
-              <CiMenuBurger style={{ color: "white" }} />
+              <CiMenuBurger style={{ color: "white", fontSize: "25px" }} />
             </button>
           </div>
           <div
