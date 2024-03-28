@@ -40,11 +40,7 @@ exports.signin = async (req, res) => {
       { expiresIn: "1h" }
     );
     // Return response with token
-    res.cookie("jwt", token, {
-      secure: true,
-      httpOnly: false,
-      sameSite: "none",
-    });
+
     res.status(200).send({ token, ...user._doc });
   } catch (err) {
     console.log(err);
@@ -117,7 +113,15 @@ exports.signup = async (req, res) => {
 
 exports.checkAuth = async (req, res) => {
   try {
-    const token = req.cookies.jwt;
+    const authHeader = req.headers["authorization"];
+
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return res
+        .status(401)
+        .json({ auth: false, message: "No Token Provided." });
+    }
+
+    const token = authHeader.split(" ")[1];
 
     if (!token) {
       return res
@@ -140,32 +144,43 @@ exports.checkAuth = async (req, res) => {
 
 exports.checkAdmin = async (req, res) => {
   try {
-    // Get the JWT token from the cookie
-    const token = req.cookies.jwt;
+    // Get the JWT token from the request headers
+    const token = req.headers.authorization;
 
-    if (!token) {
+    if (!token || !token.startsWith("Bearer ")) {
       return res
         .status(401)
         .json({ message: "Unauthorized: No token provided" });
     }
 
+    // Extract the token from the authorization header
+    const tokenString = token.split(" ")[1];
+
     // Verify and decode the token to extract user information
-    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    const decodedToken = jwt.verify(tokenString, process.env.JWT_SECRET);
 
     // Assuming the token contains the user's email
     const userEmail = decodedToken.email;
+
+    // Find the user in the database based on the email
     const user = await User.findOne({ email: userEmail });
+
     // If no user with that email exists
+    if (!user) {
+      return res.status(401).json({ message: "Unauthorized: Invalid token" });
+    }
+
+    // Check if the user is an admin
     if (user.role === "admin") {
       return res.status(200).send(true);
     } else {
       return res.status(200).send(false);
     }
-  } catch (e) {
-    console.error(`Unexpected Error: ${e}`);
+  } catch (error) {
+    console.error(`Unexpected Error: ${error}`);
+    return res.status(500).json({ message: "Internal Server Error" });
   }
 };
-
 exports.verify = (req, res) => {
   const { token } = req.query;
   if (!token) {
