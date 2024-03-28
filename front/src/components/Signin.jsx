@@ -15,7 +15,12 @@ const Signin = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    if (!email || !password) {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailPattern.test(email)) {
+      setError("Please enter a valid email address.");
+      setLoading(false);
+      return;
+    } else if (!email || !password) {
       setError("Please fill out all fields.");
       setLoading(false); // Update loading state immediately for better UX
       return;

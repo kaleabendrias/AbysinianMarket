@@ -13,7 +13,7 @@ const Footer = () => {
         <div className="">
           <div className="flex items-center justify-center mt-5 text-lg space-x-2">
             <p>Signup for our newsletter</p>
-            <input type="text" />
+            <input type="text" className="text-black"/>
             <button className="text-white bg-green-600 p-2 rounded-lg">
               Submit
             </button>
