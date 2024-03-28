@@ -85,13 +85,13 @@ const Signin = () => {
         </div>
 
         <div className="mb-6">
-          <a
+          <button
             className="mb-4 border border-gray-400 px-12 py-2 rounded-lg flex items-center bg-blue-700"
             onClick={handleGoogleLogin}
           >
             <FaGoogle width={32} style={{ color: "white" }}></FaGoogle>
             <span className="ml-2 text-white">Login with Google</span>
-          </a>
+          </button>
           <p className="text-center">OR</p>
         </div>
 
