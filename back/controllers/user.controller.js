@@ -74,7 +74,7 @@ exports.signup = async (req, res) => {
     }
   );
 
-  const verificationUrl = `http://localhost:5000/api/auth/verify?token=${verificationToken}`;
+  const verificationUrl = `https://abysinianmarket.onrender.com/api/auth/verify?token=${verificationToken}`;
 
   const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -205,7 +205,7 @@ exports.verify = (req, res) => {
       user.approved = true;
       await user.save();
 
-      return res.redirect("http://localhost:5173/signin");
+      return res.redirect("https://abysinian-market.vercel.app/signin");
     } catch (error) {
       console.error(error);
       return res.status(500).send({ message: "Internal Server Error" });
@@ -267,7 +267,7 @@ exports.forgot = async (req, res) => {
       html: `
         <p>Hello ${user.name},</p>
         <p>You have requested to reset your password. Please click the following link to reset your password:</p>
-        <a href="http://localhost:5173/reset-password?token=${verificationToken}">Reset Password</a>
+        <a href="https://abysinian-market.vercel.app/reset-password?token=${verificationToken}">Reset Password</a>
         <p>If you did not request this, please ignore this email and your password will remain unchanged.</p>
       `,
     };
