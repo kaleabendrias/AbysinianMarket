@@ -98,7 +98,6 @@ app.get(
 
     delete user.password; // Remove the password before sending it to user
     res.status(200).send({ token, ...user._doc });
-    res.redirect("https://abysinian-market.vercel.app/protected");
   }
 );
 
