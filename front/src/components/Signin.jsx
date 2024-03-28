@@ -38,6 +38,8 @@ const Signin = () => {
       )
       .then((response) => {
         console.log(response);
+        console.log(response.data.token);
+        localStorage.setItem("token", response.data.token);
         navigate("/protected");
         window.location.reload();
       })

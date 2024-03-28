@@ -16,16 +16,23 @@ const Navbar = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        setIsAuthenticated(false);
+        return;
+      }
+
       try {
         const response = await axios.get(
           "https://abysinianmarket.onrender.com/api/auth/checkauth",
           {
-            withCredentials: true,
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           }
         );
 
         setIsAuthenticated(response.data.auth);
-
         if (response.data.auth) {
           const isAdminResult = await isAdmin();
           setIsAdminUser(isAdminResult);
@@ -40,14 +47,18 @@ const Navbar = () => {
   }, []);
 
   const handleSignout = (e) => {
-    e.preventDefault;
+    e.preventDefault();
     axios
       .get("https://abysinianmarket.onrender.com/api/auth/logout", {
         withCredentials: true,
       })
       .then((response) => {
         console.log(response);
+        // Remove token from local storage
+        localStorage.removeItem("token");
+        // Navigate to the signin page
         navigate("/signin");
+        // Reload the page
         window.location.reload();
       })
       .catch((err) => console.log(err));
