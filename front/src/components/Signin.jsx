@@ -54,21 +54,21 @@ const Signin = () => {
       });
   };
 
-  const handleGoogleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.get(
-        "https://abysinianmarket.onrender.com/auth/google"
-      );
-      const token = response.data.token; // Assuming the response contains the token
-      localStorage.setItem("token", token);
-      // Optionally, redirect the user to another page after saving the token
-      // window.location.href = "/redirect-page";
-    } catch (err) {
-      setError("Failed to login with Google");
-      console.error("Failed to login with Google:", err);
-    }
-  };
+  // const handleGoogleLogin = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const response = await axios.get(
+  //       "https://abysinianmarket.onrender.com/auth/google"
+  //     );
+  //     const token = response.data.token; // Assuming the response contains the token
+  //     localStorage.setItem("token", token);
+  //     // Optionally, redirect the user to another page after saving the token
+  //     // window.location.href = "/redirect-page";
+  //   } catch (err) {
+  //     setError("Failed to login with Google");
+  //     console.error("Failed to login with Google:", err);
+  //   }
+  // };
 
   return (
     <div className="h-screen mt-16">
@@ -85,13 +85,14 @@ const Signin = () => {
         </div>
 
         <div className="mb-6">
-          <button
+          <a
+            href="https://abysinianmarket.onrender.com/auth/google"
             className="mb-4 border border-gray-400 px-12 py-2 rounded-lg flex items-center bg-blue-700"
-            onClick={handleGoogleLogin}
+            // onClick={handleGoogleLogin}
           >
             <FaGoogle width={32} style={{ color: "white" }}></FaGoogle>
             <span className="ml-2 text-white">Login with Google</span>
-          </button>
+          </a>
           <p className="text-center">OR</p>
         </div>
 
