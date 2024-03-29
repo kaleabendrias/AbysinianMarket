@@ -10,7 +10,7 @@ const About = () => {
   return (
     <div className="mt-28">
       <div className="flex flex-col space-y-4">
-        <p className="font-bold text-2xl mx-16 text-center text-blue-600">
+        <p className="font-bold text-2xl md:text-4xl mx-16 text-center text-blue-600">
           About Us
         </p>
         <div className="flex flex-col justify-center items-center mt-8">
@@ -88,8 +88,11 @@ const About = () => {
           </a>
           <p className="">Developer</p>
         </div>
-        <div className="m-16">
-          <div className="flex flex-col md:flex-row items-center text-lg space-x-4">
+        <div className="mt-16">
+          <p className="text-2xl md:text-4xl text-center w-full mt-24 mb-8 text-blue-700 font-bold">
+            Testimonials
+          </p>
+          <div className="mb-16 flex flex-col md:flex-row items-center text-lg space-x-4">
             <motion.div
               initial={{ x: -100 }}
               whileInView={{ x: 1 }}

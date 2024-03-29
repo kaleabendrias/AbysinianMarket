@@ -119,7 +119,7 @@ export function SparklesPreview() {
           transition={{
             type: "spring",
             stiffness: 100,
-            damping: 30,
+            damping: 10,
           }}
         >
           <div className="absolute left-3 inset-y-0 flex items-center text-black text-4xl md:text-8xl font-bold px-4 font-mono">
@@ -133,7 +133,7 @@ export function SparklesPreview() {
           transition={{
             type: "spring",
             stiffness: 100,
-            damping: 30,
+            damping: 10,
           }}
         >
           <div className="font-mono absolute right-3 inset-y-6 flex items-center text-black text-4xl md:text-8xl font-bold px-4">
