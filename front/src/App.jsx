@@ -17,6 +17,7 @@ import ChangePassword from "./components/ChangePassword";
 import Accessories from "./components/Accessories";
 import ContactUs from "./components/ContactUs";
 import SingleAccessory from "./components/SingleAccessory";
+import NotFound from "./components/NotFound";
 
 function App() {
   return (
@@ -162,6 +163,14 @@ function App() {
                 </MainLayOut>
               }
             ></ProtectedWrap>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <MainLayOut>
+              <NotFound />
+            </MainLayOut>
           }
         />
       </Routes>

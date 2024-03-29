@@ -48,7 +48,7 @@ const ForgotPassword = () => {
                 "Reset Password"
               )}
             </button>
-            {message && <p>{message}</p>}
+            {message && <p className="text-green-700">{message}</p>}
           </div>
         </form>
       </div>
