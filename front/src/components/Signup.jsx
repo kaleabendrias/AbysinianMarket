@@ -63,7 +63,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="h-screen mt-24 mx-28 md:mx-2">
+    <div className="h-screen m-4 mt-24 md:mx-28 ">
       <div className="h-full flex flex-col items-center justify-center">
         <p className="text-xl md:text-3xl">
           <span className="bg-black text-white rounded-lg p-1">Abysinia</span>
@@ -76,7 +76,7 @@ const Signup = () => {
           </p>
         </div>
 
-        <div className="w-full lg:w-[38%]">
+        <div className="w-[80%] lg:w-[38%]">
           {error && (
             <p className="text-red-700 text-base md:text-lg mt-2 md:mt-4 font-medium">
               {error}

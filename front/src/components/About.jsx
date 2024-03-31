@@ -10,18 +10,18 @@ const About = () => {
   return (
     <div className="mt-28">
       <div className="flex flex-col space-y-4">
-        <p className="font-bold text-2xl md:text-4xl mx-16 text-center text-blue-600">
+        <p className="font-bold mx-4 text-2xl md:text-4xl md:mx-16 text-center text-blue-600">
           About Us
         </p>
         <div className="flex flex-col justify-center items-center mt-8">
-          <div className="flex items-center justify-center space-x-10 mx-16 mt-4">
+          <div className="flex mx-4 items-center justify-center md:space-x-10 md:mx-16 mt-4">
             <motion.div
               className="w-full"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 1 }}
             >
-              <img src={image2} className="w-80" />
+              <img src={image2} className="hidden md:flex w-80" />
             </motion.div>
             <div>
               <p className="text-3xl text-center w-full mb-8">

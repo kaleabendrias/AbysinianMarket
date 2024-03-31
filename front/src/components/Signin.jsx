@@ -101,7 +101,7 @@ const Signin = () => {
           <p className="text-center">OR</p>
         </div>
 
-        <div className="w-[38%]">
+        <div className="w-[80%] md:w-[38%]">
           {error && (
             <p className="text-red-700 text-base md:text-lg mt-2 md:mt-4 font-medium">
               {error}

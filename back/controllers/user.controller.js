@@ -33,13 +33,12 @@ exports.signin = async (req, res) => {
     if (!isMatch) {
       return res.status(400).send({ message: "Invalid credentials" });
     }
-    // Create token
+
     const token = jwt.sign(
       { _id: user._id, email: user.email },
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
-    // Return response with token
 
     res.status(200).send({ token, ...user._doc });
   } catch (err) {
@@ -53,7 +52,7 @@ exports.signup = async (req, res) => {
   if (!email || !name || !password) {
     return res.status(400).json({ message: "Missing fields" });
   }
-  //   Check if user already exists
+
   let user = await User.findOne({ email: email });
   if (user) {
     return res.status(400).send({ message: "Email is taken" });
@@ -129,7 +128,6 @@ exports.checkAuth = async (req, res) => {
         .json({ auth: false, message: "No Token Provided." });
     }
 
-    // Verify token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     return res.status(200).send({ auth: true, user: decoded.user });
   } catch (error) {
@@ -139,8 +137,6 @@ exports.checkAuth = async (req, res) => {
       .send({ auth: false, message: "Failed to authenticate token." });
   }
 };
-
-// Example implementation in your backend controller
 
 exports.checkAdmin = async (req, res) => {
   try {
@@ -153,16 +149,12 @@ exports.checkAdmin = async (req, res) => {
         .json({ message: "Unauthorized: No token provided" });
     }
 
-    // Extract the token from the authorization header
     const tokenString = token.split(" ")[1];
 
-    // Verify and decode the token to extract user information
     const decodedToken = jwt.verify(tokenString, process.env.JWT_SECRET);
 
-    // Assuming the token contains the user's email
     const userEmail = decodedToken.email;
 
-    // Find the user in the database based on the email
     const user = await User.findOne({ email: userEmail });
 
     // If no user with that email exists
@@ -170,7 +162,6 @@ exports.checkAdmin = async (req, res) => {
       return res.status(401).json({ message: "Unauthorized: Invalid token" });
     }
 
-    // Check if the user is an admin
     if (user.role === "admin") {
       return res.status(200).send(true);
     } else {
@@ -201,7 +192,6 @@ exports.verify = (req, res) => {
         return res.status(404).send({ message: "User not found." });
       }
 
-      // Update user's verification status to true
       user.approved = true;
       await user.save();
 
@@ -227,30 +217,23 @@ exports.forgot = async (req, res) => {
   const { email } = req.body;
 
   try {
-    // Find the user with the given email
     const user = await User.findOne({ email });
 
-    // If user not found, return an error
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Generate a unique verification token
     const verificationToken = jwt.sign(
       { email: user.email },
       process.env.JWT_SECRET,
       { expiresIn: "1d" }
     );
 
-    // Save the verification token and expiration time to the user document
     user.resetPasswordToken = verificationToken;
-    user.resetPasswordExpires = Date.now() + 86400000; // Token expires in 1 day
+    user.resetPasswordExpires = Date.now() + 86400000;
     await user.save();
 
-    // Send an email to the user containing a link with the verification token
     const transporter = nodemailer.createTransport({
-      // Configure your email service here
-      // Example configuration for Gmail:
       service: "gmail",
       port: 465,
       secure: true,
@@ -309,10 +292,8 @@ exports.updatePassword = async (req, res) => {
         .json({ message: "Invalid token or mismatched user" });
     }
 
-    // Hash the new password before updating it in the database
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Update the user's password
     user.password = hashedPassword;
     await user.save();
 
@@ -391,7 +372,6 @@ exports.sell = async (req, res) => {
         });
         await newClothing.save();
       }
-      // ... handle other types ...
 
       res.status(201).json({ message: "Item created successfully!" });
     });

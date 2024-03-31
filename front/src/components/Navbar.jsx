@@ -120,7 +120,7 @@ const Navbar = () => {
               <Link
                 to="/signin"
                 type="button"
-                className="flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg md:text-sm px-5 py-2.5 focus:outline-none"
+                className="mr-4 flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg md:text-sm px-5 py-2.5 focus:outline-none"
               >
                 Signin
               </Link>
