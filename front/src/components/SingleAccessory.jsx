@@ -34,7 +34,7 @@ const SingleAccessory = () => {
     try {
       const res = await axios.post(
         "https://abysinianmarket.onrender.com/api/buy/",
-        { id },
+        { id, type: "accessory" },
         { withCredentials: true },
         {
           headers: { "Content-Type": "application/json" },

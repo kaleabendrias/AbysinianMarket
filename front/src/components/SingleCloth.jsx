@@ -29,12 +29,12 @@ const SingleCloth = () => {
     getClothes();
   }, []);
 
-  const handleBuy = async (e) => {
+  const handleBuy = async (e, id) => {
     e.preventDefault;
     try {
       const res = await axios.post(
         "https://abysinianmarket.onrender.com/api/buy/",
-        { id },
+        { id, type: "clothing" },
         { withCredentials: true },
         {
           headers: { "Content-Type": "application/json" },
@@ -98,7 +98,7 @@ const SingleCloth = () => {
             </p>
           </div>
           <button
-            onClick={handleBuy}
+            onClick={(e) => handleBuy(e, id)}
             className="text-white hover:border-white/40 flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-5 py-2.5 text-center text-md font-medium  focus:outline-none focus:ring-4 focus:ring-blue-300"
           >
             <svg
