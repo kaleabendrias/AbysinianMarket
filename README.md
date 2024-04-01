@@ -6,7 +6,6 @@ Abyssinian Market is an e-commerce platform designed to connect buyers and selle
 
 - **User Authentication**: Secure user authentication using JWT (JSON Web Tokens) and OAuth with Google.
 - **Product Listings**: Browse a wide range of Ethiopian traditional clothing, accessories, and other products.
-- **Shopping Cart**: Add items to a shopping cart for easy checkout.
 - **Secure Checkout**: Secure payment processing with Chapa payment gateway integration.
 - **Seller Dashboard**: Sellers can manage their product listings, view orders, and track sales.
 - **Contact Us**: Users can reach out to the platform administrators for inquiries and support.
@@ -40,14 +39,39 @@ Abyssinian Market is an e-commerce platform designed to connect buyers and selle
 
 ## Getting Started
 
-To run this application locally, follow these steps:
+**Frontend Installation:**
 
-1. Clone this repository to your local machine.
-2. Navigate to the project directory.
-3. Install dependencies using `npm install`.
-4. Create a `.env` file in the root directory and configure environment variables.
-5. Run the frontend and backend servers using `npm start` for each.
-6. Access the application in your browser at `http://localhost:5173`.
+1. Open your terminal.
+2. Navigate to the `front` directory of the Abyssinian Market app using the `cd` command:
+   ```
+   cd front
+   ```
+3. Once you are inside the `frontend` directory, install the dependencies using npm:
+   ```
+   npm install
+   ```
+4. run the server,
+
+```
+npm run dev
+```
+
+**Backend Installation**:
+
+1. Open another terminal window or tab.
+2. Navigate to the `back` directory of the Abyssinian Market app using the `cd` command:
+   ```
+   cd back
+   ```
+3. Once you are inside the `backend` directory, install the dependencies using npm:
+   ```
+   npm install
+   ```
+4. run the server,
+
+```
+nodemon index.js
+```
 
 ## Contributing
 
