@@ -19,12 +19,10 @@ Abyssinian Market is an e-commerce platform designed to connect buyers and selle
   - Framer Motion (for animations)
   - Axios (for HTTP requests)
   - React Router (for client-side routing)
-  - Redux (for state management)
 - **Backend**:
   - Node.js
   - Express.js
   - MongoDB (with Mongoose ORM)
-  - Redis (for caching)
   - Cloudinary (for image storage)
 - **Authentication**:
   - Passport.js (for Google OAuth)
@@ -58,7 +56,3 @@ Contributions are welcome! Feel free to open issues or submit pull requests to h
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
-
-Feel free to customize this README template to fit the specific details and requirements of your Abyssinian Market app.
