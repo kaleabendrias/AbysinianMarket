@@ -40,14 +40,14 @@ const ChangePassword = () => {
       <div className="h-screen flex flex-col items-center">
         <p className="text-2xl font-bold mb-2">Forgot Password</p>
         <form className="flex flex-col relative">
-          <label className="font-thin text-xl m-2">email</label>
+          <label className="font-thin text-xl m-2">password</label>
           <input
             className="border border-gray-400 rounded-sm focus:outline-none focus:border-gray-600 p-1 m-2"
             type="text"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <label className="font-thin text-xl m-2">email</label>
+          <label className="font-thin text-xl m-2">confirm password</label>
           <input
             className="border border-gray-400 rounded-sm focus:outline-none focus:border-gray-600 p-1 m-2"
             type="text"
