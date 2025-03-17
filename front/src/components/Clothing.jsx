@@ -1,18 +1,21 @@
-import axios from "axios";
+// import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaSpinner } from "react-icons/fa";
+import { useCartStore } from "../../store/cartStore"; // Import the cart store\\
+import api from "../services/axiosInterceptor";
 
 const Clothing = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const { addToCart } = useCartStore(); // Use the cart store
 
   useEffect(() => {
     const getClothes = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(
-          "https://abysinianmarket.onrender.com/api/shop/cloths"
+        const response = await api.get(
+          "/api/shop/cloths"
         );
         setData(response.data);
       } catch (error) {
@@ -28,16 +31,15 @@ const Clothing = () => {
   const handleBuy = async (e, id) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "https://abysinianmarket.onrender.com/api/buy/",
-        { id, type: "clothing" },
+      const res = await api.post(
+        "/api/buy/",
+        { items: [{id, type: 'clothing'}] },
         {
           withCredentials: true,
           headers: { "Content-Type": "application/json" },
         }
       );
       console.log(res);
-      console.log(id);
       const checkoutUrl = res.data.data.checkout_url;
       window.location.href = checkoutUrl;
     } catch (e) {
@@ -86,6 +88,12 @@ const Clothing = () => {
                   </div>
                 </div>
                 <button
+                  onClick={() => addToCart(clothingItem)} // Add to cart
+                  className="hover:border-white/40 flex items-center justify-center rounded-md border border-transparent bg-green-600 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-green-300 w-full mb-2"
+                >
+                  Add to Cart
+                </button>
+                <button
                   onClick={(e) => handleBuy(e, clothingItem._id)}
                   className="hover:border-white/40 flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-blue-300 w-full"
                 >
@@ -105,7 +113,7 @@ const Clothing = () => {
           ))}
         </div>
       ) : (
-        <FaSpinner className="w-full flex justify-center animate-spin ml-4 text-center text-8xl" />
+        <FaSpinner className="w-screen flex justify-center items-center animate-spin ml-4 text-center text-8xl" />
       )}
     </div>
   );

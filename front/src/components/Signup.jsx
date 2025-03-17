@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash, FaSpinner } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -19,131 +20,122 @@ const Signup = () => {
     setLoading(true);
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email || !emailPattern.test(email)) {
-      setError("Please enter a valid email address.");
+      toast.error("Please enter a valid email address.");
       setLoading(false);
       return;
     } else if (!password) {
-      setError("Please enter your password.");
+      toast.error("Please enter your password.");
       setLoading(false);
       return;
     } else if (password.length < 6) {
-      setError("Your password must be at least 6 characters long.");
+      toast.error("Your password must be at least 6 characters long.");
       setLoading(false);
       return;
     } else if (password !== confirmPassword) {
-      setError("Passwords do not match.");
+      toast.error("Passwords do not match.");
       setLoading(false);
       return;
     }
+
     axios
       .post(
         "https://abysinianmarket.onrender.com/api/auth/signup",
-        {
-          email,
-          name,
-          password,
-        },
-        {
-          withCredentials: true,
-        }
+        { email, name, password },
+        { withCredentials: true }
       )
-      .then((response) => {
-        console.log(response);
-        navigate("/signin");
-      })
-      .catch((err) => {
-        console.log(err);
-        if (err) {
-          setError(err.response.data.message);
-        }
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+      .then(() => navigate("/signin"))
+      .catch((err) => setError(err.response?.data?.message || "An error occurred."))
+      .finally(() => setLoading(false));
   };
 
   return (
-    <div className="h-screen m-4 mt-24 md:mx-28 ">
-      <div className="h-full flex flex-col items-center justify-center">
-        <p className="text-xl md:text-3xl">
-          <span className="bg-black text-white rounded-lg p-1">Abysinia</span>
-          market
-        </p>
-
-        <div>
-          <p className="text-xl md:text-3xl font-bold m-4 tracking-wide">
-            Signup to create your account
-          </p>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-50 to-purple-50 p-4">
+      <div className="w-full max-w-md bg-white rounded-lg shadow-2xl p-8">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-gray-900">
+            <span className="bg-black text-white rounded-lg px-2 py-1">Abysinia</span> Market
+          </h1>
+          <p className="text-xl font-semibold mt-4 text-gray-700">Sign up to create your account</p>
         </div>
 
-        <div className="w-[80%] lg:w-[38%]">
-          {error && (
-            <p className="text-red-700 text-base md:text-lg mt-2 md:mt-4 font-medium">
-              {error}
-            </p>
-          )}
-          <form className="flex flex-col relative">
-            <label className="text-md font-thin md:text-xl ">user name</label>
+        {error && <p className="text-red-500 text-sm text-center mb-4">{error}</p>}
+
+        <form className="space-y-6">
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Name</label>
             <input
-              className="border border-gray-400 rounded-sm focus:outline-none focus:border-gray-600 p-1 m-2"
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              className="w-full px-4 py-2 mt-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter your name"
             />
+          </div>
 
-            <label className="text-md font-thin md:text-xl m-2">email</label>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Email</label>
             <input
-              className="border border-gray-400 rounded-sm focus:outline-none focus:border-gray-600 p-1 m-2"
-              type="text"
+              type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              className="w-full px-4 py-2 mt-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter your email"
             />
+          </div>
 
-            <label className="text-md font-thin md:text-xl m-2">password</label>
+          <div className="relative">
+            <label className="block text-sm font-medium text-gray-700">Password</label>
             <input
               type={visible ? "text" : "password"}
-              className="border border-gray-400 rounded-sm focus:outline-none focus:border-gray-600 p-1 m-2"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              className="w-full px-4 py-2 mt-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter your password"
             />
             <button
-              className="absolute bottom-[43%] right-4"
               type="button"
               onClick={() => setVisible(!visible)}
+              className="absolute right-3 top-10 text-gray-500 hover:text-gray-700"
             >
               {visible ? <FaEyeSlash /> : <FaEye />}
             </button>
+          </div>
 
-            <label className="text-md font-thin md:text-xl m-2">
-              Confirm password
-            </label>
+          <div className="relative">
+            <label className="block text-sm font-medium text-gray-700">Confirm Password</label>
             <input
               type={visible1 ? "text" : "password"}
-              className="border border-gray-400 rounded-sm focus:outline-none focus:border-gray-600 p-1 m-2"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
+              className="w-full px-4 py-2 mt-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Confirm your password"
             />
             <button
-              className="absolute bottom-[21%] right-4"
               type="button"
               onClick={() => setVisible1(!visible1)}
+              className="absolute right-3 top-10 text-gray-500 hover:text-gray-700"
             >
               {visible1 ? <FaEyeSlash /> : <FaEye />}
             </button>
+          </div>
 
-            <button
-              className="w-full bg-blue-700 text-white rounded-lg mt-8 py-2 hover:bg-blue-800"
-              onClick={handleSignup}
-            >
-              {loading ? (
-                <>
-                  <FaSpinner className="w-full flex justify-center animate-spin ml-4 text-center" />
-                </>
-              ) : (
-                "Signup"
-              )}
-            </button>
-          </form>
+          <button
+            type="submit"
+            onClick={handleSignup}
+            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center justify-center"
+            disabled={loading}
+          >
+            {loading ? <FaSpinner className="animate-spin" /> : "Sign Up"}
+          </button>
+        </form>
+
+        <div className="mt-6 text-center">
+          <p className="text-gray-600">
+            Already have an account?{" "}
+            <Link to="/signin" className="text-blue-600 hover:text-blue-800 font-semibold">
+              Sign In
+            </Link>
+          </p>
         </div>
       </div>
     </div>

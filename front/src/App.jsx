@@ -7,7 +7,7 @@ import Signin from "./components/Signin";
 import Signup from "./components/Signup";
 import Protected from "./components/Protected";
 import MainLayOut from "./components/MainLayout";
-import ProtectedWrap from "./components/ProtectedWrap";
+import ProtectedRoute from "./components/ProtectedWrap";
 import SellForm from "./components/SellForm";
 import Clothing from "./components/Clothing";
 import BuyForm from "./components/BuyForm";
@@ -18,6 +18,9 @@ import Accessories from "./components/Accessories";
 import ContactUs from "./components/ContactUs";
 import SingleAccessory from "./components/SingleAccessory";
 import NotFound from "./components/NotFound";
+import Cart from "./components/Cart";
+import RoleBasedRoute from "./layouts/RoleBasedRoutes";
+import AdminPurchases from "./components/AdminPurchases";
 
 function App() {
   return (
@@ -80,91 +83,83 @@ function App() {
             </MainLayOut>
           }
         />
+        {/* Protected Routes */}
+        <Route element={<ProtectedRoute />}>
+          <Route
+            path="/protected"
+            element={
+              <MainLayOut>
+                <Protected />
+              </MainLayOut>
+            }
+          />
+          <Route
+            path="/sellform"
+            element={
+              <MainLayOut>
+                <SellForm />
+              </MainLayOut>
+            }
+          />
+          <Route
+            path="/cloths"
+            element={
+              <MainLayOut>
+                <Clothing />
+              </MainLayOut>
+            }
+          />
+          <Route
+            path="/accessories"
+            element={
+              <MainLayOut>
+                <Accessories />
+              </MainLayOut>
+            }
+          />
+          <Route
+            path="/buyform"
+            element={
+              <MainLayOut>
+                <BuyForm />
+              </MainLayOut>
+            }
+          />
+          <Route
+            path="/cloth/:id"
+            element={
+              <MainLayOut>
+                <SingleCloth />
+              </MainLayOut>
+            }
+          />
+          <Route
+            path="/cart"
+            element={
+              <MainLayOut>
+                <Cart />
+              </MainLayOut>
+            }
+          />
+          <Route
+            path="/accessory/:id"
+            element={
+              <MainLayOut>
+                <SingleAccessory />
+              </MainLayOut>
+            }
+          />
+        </Route>
         <Route
-          path="/protected"
+          path="/admin"
           element={
-            <ProtectedWrap
-              element={
-                <MainLayOut>
-                  <Protected />
-                </MainLayOut>
-              }
-            ></ProtectedWrap>
+            <RoleBasedRoute allowedRoles={["admin"]}>
+            </RoleBasedRoute>
           }
-        />
-        <Route
-          path="/sellform"
-          element={
-            <ProtectedWrap
-              element={
-                <MainLayOut>
-                  <SellForm />
-                </MainLayOut>
-              }
-            ></ProtectedWrap>
-          }
-        />
-        <Route
-          path="/cloths"
-          element={
-            <ProtectedWrap
-              element={
-                <MainLayOut>
-                  <Clothing />
-                </MainLayOut>
-              }
-            ></ProtectedWrap>
-          }
-        />
-        <Route
-          path="/accessories"
-          element={
-            <ProtectedWrap
-              element={
-                <MainLayOut>
-                  <Accessories />
-                </MainLayOut>
-              }
-            ></ProtectedWrap>
-          }
-        />
-        <Route
-          path="/buyform"
-          element={
-            <ProtectedWrap
-              element={
-                <MainLayOut>
-                  <BuyForm />
-                </MainLayOut>
-              }
-            ></ProtectedWrap>
-          }
-        />
+        >
+          <Route path="purchases" element={<AdminPurchases />} />
 
-        <Route
-          path="/cloth/:id"
-          element={
-            <ProtectedWrap
-              element={
-                <MainLayOut>
-                  <SingleCloth />
-                </MainLayOut>
-              }
-            ></ProtectedWrap>
-          }
-        />
-        <Route
-          path="/accessory/:id"
-          element={
-            <ProtectedWrap
-              element={
-                <MainLayOut>
-                  <SingleAccessory />
-                </MainLayOut>
-              }
-            ></ProtectedWrap>
-          }
-        />
+        </Route>
         <Route
           path="*"
           element={

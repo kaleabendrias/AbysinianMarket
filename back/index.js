@@ -15,6 +15,7 @@ const authRoutes = require("./routes/AuthRoutes");
 const shopRoutes = require("./routes/ShopRoutes");
 const buyRoutes = require("./routes/BuyRoutes");
 const contactusRoutes = require("./routes/ContactusRoutes");
+const purchaseRoutes = require("./routes/PurchaseRoutes")
 
 require("dotenv").config();
 
@@ -22,7 +23,7 @@ const app = express();
 
 PORT = process.env.PORT || 5000;
 
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+app.use(cors({ origin: true, credentials: true }));
 
 app.use(express.json());
 
@@ -107,6 +108,7 @@ app.use("/api/shop", shopRoutes);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api/buy", buyRoutes);
 app.use("/api/contactus", contactusRoutes);
+app.use("/api/", purchaseRoutes);
 
 mongoose
   .connect(process.env.mongoURI, {

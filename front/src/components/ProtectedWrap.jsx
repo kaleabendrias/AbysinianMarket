@@ -1,33 +1,20 @@
-import checkAuth from "./auth.helper";
-import { useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
+import { useAuthStore } from "../../store/authStore";
 
-// eslint-disable-next-line react/prop-types
-const ProtectedWrap = ({ element }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(true);
+const ProtectedRoute = () => {
+    const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Check if the user is authenticated by making a request to the server
-        const res = await checkAuth();
-        setIsAuthenticated(res);
-      } catch (err) {
-        console.log(err);
-      } finally {
-        setLoading(false);
-      }
-    };
 
-    fetchData();
-  }, []);
-  // Redirect to the login page if not authenticated
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-  console.log("PrivateRoute isAuthenticate:", isAuthenticated);
-  return isAuthenticated ? element : <Navigate to="/signin" />;
-};
+    console.log("isAuthtenticated:" ,isAuthenticated)
 
-export default ProtectedWrap;
+      
+    return isAuthenticated ? (
+    <div className="flex">
+      <Outlet />
+    </div>
+    ):( <Navigate to="/signin" />);
+
+  };
+  
+
+export default ProtectedRoute;

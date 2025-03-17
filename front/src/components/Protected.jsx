@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Protected = () => {
   return (
-    <div className="my-24">
+    <div className="my-24 w-full">
       <div className="text-4xl flex justify-center items-center">
         <span className="bg-white rounded-lg p-1 text-slate-900 font-bold">
           Abysinia

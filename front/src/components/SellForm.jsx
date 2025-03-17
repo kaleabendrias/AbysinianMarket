@@ -4,11 +4,13 @@ import { useNavigate } from "react-router-dom";
 
 const SellForm = () => {
   const [selectedType, setSelectedType] = useState("");
-  const [discription, setDiscription] = useState("");
+  const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [size, setSize] = useState("");
   const [color, setColor] = useState("");
   const [selectedImages, setSelectedImages] = useState([]);
+  const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
   const handleImageChange = (event) => {
@@ -19,10 +21,19 @@ const SellForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Validate form fields
+    if (!selectedType || !description || !price || !size || !color || selectedImages.length === 0) {
+      setError("Please fill out all fields and upload at least one image.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    setError("");
+
     // Construct FormData to handle images and other data
     const formData = new FormData();
     formData.append("type", selectedType);
-    formData.append("description", discription); // Corrected typo
+    formData.append("description", description);
     formData.append("price", price);
     formData.append("size", size);
     formData.append("color", color);
@@ -46,91 +57,113 @@ const SellForm = () => {
       // Handle successful response from the server
       console.log(response.data);
       navigate("/protected");
-      // Clear form fields or display a success message
     } catch (error) {
       console.error(error);
+      setError("Failed to submit the form. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="my-32">
-      <div className="flex justify-center mt-16 text-2xl">
-        <span className=" bg-black text-white text-center px-1 rounded-md">
-          Abysinia
-        </span>
-        Market
-      </div>
+    <div className="my-12 min-h-screen w-full flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-xl w-full bg-white p-8 rounded-lg shadow-lg">
+        <div className="text-center">
+          <h2 className="text-3xl font-bold text-gray-900">
+            <span className="bg-black text-white px-2 rounded-md">Abysinia</span> Market
+          </h2>
+          <p className="mt-2 text-sm text-gray-600">Sell your items with ease</p>
+        </div>
 
-      <div className="my-16 h-full flex flex-col items-center justify-center">
-        <form className="space-y-4 w-[38%]">
-          <div className="flex flex-col justify-center">
-            <label className="font-thin text-xl m-2">Type</label>
-            <select
-              id="type"
-              name="type"
-              className="border-black border-2 mx-2"
-              value={selectedType}
-              onChange={(e) => setSelectedType(e.target.value)}
-            >
-              <option value="">Select Type</option>
-              <option value="clothing">clothing</option>
-              <option value="accessories">Accessories</option>
-              <option value="others">others</option>
-            </select>
-          </div>
-          <div className="flex flex-col justify-center">
-            <label className="font-thin text-xl m-2">Discription</label>
-            <input
-              className="border border-gray-400 rounded-sm focus:outline-none focus:border-gray-600 p-1 m-2"
-              type="text"
-              value={discription}
-              onChange={(e) => setDiscription(e.target.value)}
-            />
-          </div>
-          <div className="flex flex-col justify-center">
-            <label className="font-thin text-xl m-2">Price</label>
-            <input
-              className="border border-gray-400 rounded-sm focus:outline-none focus:border-gray-600 p-1 m-2"
-              type="text"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-            />
-          </div>
-          <div className="flex flex-col justify-center">
-            <label className="font-thin text-xl m-2">Size</label>
-            <input
-              className="border border-gray-400 rounded-sm focus:outline-none focus:border-gray-600 p-1 m-2"
-              type="text"
-              value={size}
-              onChange={(e) => setSize(e.target.value)}
-            />
-          </div>
-          <div className="flex flex-col justify-center">
-            <label className="font-thin text-xl m-2">Color</label>
-            <input
-              className="border border-gray-400 rounded-sm focus:outline-none focus:border-gray-600 p-1 m-2"
-              type="text"
-              value={color}
-              onChange={(e) => setColor(e.target.value)}
-            />
-          </div>
-          <div className="flex flex-col justify-center">
-            <label className="font-thin text-xl m-2">Image</label>
-            <input
-              type="file"
-              accept="image/*"
-              multiple
-              className="border border-gray-400 rounded-sm focus:outline-none focus:border-gray-600 p-1 m-2"
-              onChange={handleImageChange}
-            />
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+          {error && (
+            <div className="text-red-500 text-sm text-center">
+              {error}
+            </div>
+          )}
+
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Type</label>
+              <select
+                id="type"
+                name="type"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value={selectedType}
+                onChange={(e) => setSelectedType(e.target.value)}
+                required
+              >
+                <option value="">Select Type</option>
+                <option value="clothing">Clothing</option>
+                <option value="accessories">Accessories</option>
+                <option value="others">Others</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Description</label>
+              <input
+                type="text"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Price (ETB)</label>
+              <input
+                type="number"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Size</label>
+              <input
+                type="text"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value={size}
+                onChange={(e) => setSize(e.target.value)}
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Color</label>
+              <input
+                type="text"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value={color}
+                onChange={(e) => setColor(e.target.value)}
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Images</label>
+              <input
+                type="file"
+                accept="image/*"
+                multiple
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                onChange={handleImageChange}
+                required
+              />
+            </div>
           </div>
 
-          <div className="flex flex-col justify-center">
+          <div>
             <button
-              className="w-full bg-blue-700 text-white rounded-lg mt-8 py-2 hover:bg-blue-800"
-              onClick={handleSubmit}
+              type="submit"
+              className="w-full bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              disabled={isSubmitting}
             >
-              Submit
+              {isSubmitting ? "Submitting..." : "Submit"}
             </button>
           </div>
         </form>
