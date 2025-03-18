@@ -207,6 +207,17 @@ const Navbar = () => {
                       Sell
                     </Link>
                   )}
+                  <Link
+                    to="/cart"
+                    className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition duration-300 flex items-center justify-center"
+                  >
+                    <FaShoppingCart className="mr-2" />
+                    {cart.length > 0 && (
+                      <span className="ml-2 bg-red-600 text-white text-xs rounded-full px-2 py-1">
+                        {cart.length}
+                      </span>
+                    )}
+                  </Link>
                   <button
                     onClick={(e) => {
                       handleSignout(e);
