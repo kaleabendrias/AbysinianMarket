@@ -1,6 +1,6 @@
 // pages/AdminPurchases.js
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect, useState } from "react";
+
 import api from "../services/axiosInterceptor"
 
 const AdminPurchases = () => {
@@ -10,7 +10,7 @@ const AdminPurchases = () => {
   useEffect(() => {
     const fetchPurchases = async () => {
       try {
-        const response = await axios.api("/api/purchases", {
+        const response = await api.get("/api/purchases", {
           withCredentials: true,
         });
         setPurchases(response.data);
