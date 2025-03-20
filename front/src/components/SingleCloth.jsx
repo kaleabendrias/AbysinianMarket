@@ -58,8 +58,8 @@ const SingleCloth = () => {
   }
 
   return (
-    <div className="my-28 flex flex-wrap justify-center text-black">
-      <div className="group border-gray-100/30 flex w-full max-w-4xl self-center overflow-hidden rounded-lg border bg-white shadow-md m-2">
+    <div className="my-20 flex flex-wrap justify-center text-black">
+      <div className="group border-gray-100/30 md:flex w-full max-w-4xl self-center overflow-hidden rounded-lg border bg-white shadow-md m-2">
         <a
           className="relative mx-3 mt-3 flex h-full overflow-hidden rounded-xl"
           href="#"

@@ -11,6 +11,7 @@ import { FaShoppingCart } from "react-icons/fa";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isAuthenticated, user } = useAuthStore();
+  const isAdmin = user?.role == "admin" ? true : false;
   const logout = useAuthStore((state) => state.logout);
   const [isAdminUser, setIsAdminUser] = useState(false);
   const { cart } = useCartStore();
@@ -24,8 +25,6 @@ const Navbar = () => {
   useEffect(() => {
     const checkAdminStatus = async () => {
       if (isAuthenticated) {
-        const isAdminResult = user.role;
-        console.log("isAdminResult:", isAdminResult);
         user.role === "admin" ? setIsAdminUser(true) : setIsAdminUser(false);
       }
     };
@@ -61,7 +60,7 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden sm:flex sm:items-center sm:space-x-6">
+          <div className="hidden md:flex md:items-center md:space-x-6">
             <Link
               to="/"
               className={`text-white hover:text-blue-400 transition duration-300 ${
@@ -96,10 +95,21 @@ const Navbar = () => {
                 Items
               </Link>
             )}
+            {isAuthenticated && isAdmin && (
+              <Link
+                to="/admin/purchases"
+                className={`text-white hover:text-blue-400 transition duration-300 ${
+                  location.pathname === "/admin/purchases" ? "font-bold" : ""
+                }`}
+                onClick={toggleMenu}
+              >
+                Orders
+              </Link>
+            )}
           </div>
 
           {/* Auth Buttons */}
-          <div className="hidden sm:flex sm:items-center sm:space-x-4">
+          <div className="hidden md:flex md:items-center md:space-x-4">
             {!isAuthenticated ? (
               <Link
                 to="/signin"
@@ -109,6 +119,17 @@ const Navbar = () => {
               </Link>
             ) : (
               <div className="flex items-center space-x-4">
+                <Link
+                  to="/cart"
+                  className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition duration-300 flex items-center justify-center"
+                >
+                  <FaShoppingCart className="mr-2" />
+                  {cart.length > 0 && (
+                    <span className="ml-2 bg-red-600 text-white text-xs rounded-full px-2 py-1">
+                      {cart.length}
+                    </span>
+                  )}
+                </Link>
                 {isAdminUser && (
                   <Link
                     to="/sellform"
@@ -123,115 +144,121 @@ const Navbar = () => {
                 >
                   Sign Out
                 </button>
-                <Link
-                    to="/cart"
-                    className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition duration-300 flex items-center justify-center"
-                  >
-                    <FaShoppingCart className="mr-2" />
-                    {cart.length > 0 && (
-                      <span className="ml-2 bg-red-600 text-white text-xs rounded-full px-2 py-1">
-                        {cart.length}
-                      </span>
-                    )}
-                  </Link>
               </div>
             )}
           </div>
 
-          {/* Mobile Menu Toggle */}
-          <div className="sm:hidden flex items-center">
-            <button onClick={toggleMenu} className="text-white focus:outline-none">
-              <CiMenuBurger className="w-6 h-6" />
-            </button>
+          {/* Mobile Menu */}
+          <div className="md:hidden flex items-center justify-between mb-2 space-x-3">
+            <Link
+              to="/cart"
+              className="bg-green-600 hover:bg-green-700 text-white px-2 py-1 rounded-lg transition duration-300 flex items-center justify-center"
+            >
+              <FaShoppingCart className="mr-2" />
+              {cart.length > 0 && (
+                <span className="ml-2 bg-red-600 text-white text-xs rounded-full px-2 py-1">
+                  {cart.length}
+                </span>
+              )}
+            </Link>
+            {/* Mobile Menu Toggle */}
+            <div className="md:hidden flex items-center">
+              <button
+                onClick={toggleMenu}
+                className="text-white focus:outline-none"
+              >
+                <CiMenuBurger className="w-6 h-6" />
+              </button>
+            </div>
           </div>
-        </div>
-
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="sm:hidden mt-2">
-            <div className="flex flex-col space-y-2 bg-slate-900 bg-opacity-90 p-4 rounded-lg">
-              <Link
-                to="/"
-                className={`text-white hover:text-blue-400 transition duration-300 ${
-                  location.pathname === "/" ? "font-bold" : ""
-                }`}
-                onClick={toggleMenu}
-              >
-                Home
-              </Link>
-              <Link
-                to="/about"
-                className={`text-white hover:text-blue-400 transition duration-300 ${
-                  location.pathname === "/about" ? "font-bold" : ""
-                }`}
-                onClick={toggleMenu}
-              >
-                About
-              </Link>
-              <Link
-                to="/contactus"
-                className={`text-white hover:text-blue-400 transition duration-300 ${
-                  location.pathname === "/contactus" ? "font-bold" : ""
-                }`}
-                onClick={toggleMenu}
-              >
-                Contact Us
-              </Link>
-              {isAuthenticated && (
+          {isMenuOpen && (
+            <div className="md:hidden absolute top-16 left-0 w-full bg-slate-900 bg-opacity-95 backdrop-blur-md px-6 py-4 z-40 shadow-lg">
+              <div className="flex flex-col space-y-4">
                 <Link
-                  to="/protected"
+                  to="/"
                   className={`text-white hover:text-blue-400 transition duration-300 ${
-                    location.pathname === "/protected" ? "font-bold" : ""
+                    location.pathname === "/" ? "font-bold" : ""
                   }`}
                   onClick={toggleMenu}
                 >
-                  Items
+                  Home
                 </Link>
-              )}
-              {!isAuthenticated ? (
                 <Link
-                  to="/signin"
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition duration-300"
+                  to="/about"
+                  className={`text-white hover:text-blue-400 transition duration-300 ${
+                    location.pathname === "/about" ? "font-bold" : ""
+                  }`}
                   onClick={toggleMenu}
                 >
-                  Sign In
+                  About
                 </Link>
-              ) : (
-                <div className="flex flex-col space-y-2">
-                  {isAdminUser && (
-                    <Link
-                      to="/sellform"
-                      className="bg-yellow-400 hover:bg-yellow-500 text-black px-4 py-2 rounded-lg transition duration-300"
-                      onClick={toggleMenu}
-                    >
-                      Sell
-                    </Link>
-                  )}
+                <Link
+                  to="/contactus"
+                  className={`text-white hover:text-blue-400 transition duration-300 ${
+                    location.pathname === "/contactus" ? "font-bold" : ""
+                  }`}
+                  onClick={toggleMenu}
+                >
+                  Contact Us
+                </Link>
+                {isAuthenticated && (
                   <Link
-                    to="/cart"
-                    className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition duration-300 flex items-center justify-center"
+                    to="/protected"
+                    className={`text-white hover:text-blue-400 transition duration-300 ${
+                      location.pathname === "/protected" ? "font-bold" : ""
+                    }`}
+                    onClick={toggleMenu}
                   >
-                    <FaShoppingCart className="mr-2" />
-                    {cart.length > 0 && (
-                      <span className="ml-2 bg-red-600 text-white text-xs rounded-full px-2 py-1">
-                        {cart.length}
-                      </span>
-                    )}
+                    Items
                   </Link>
-                  <button
-                    onClick={(e) => {
-                      handleSignout(e);
-                      toggleMenu();
-                    }}
-                    className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition duration-300"
+                )}
+                {isAuthenticated && isAdmin && (
+                  <Link
+                    to="/admin/purchases"
+                    className={`text-white hover:text-blue-400 transition duration-300 ${
+                      location.pathname === "/admin/purchases"
+                        ? "font-bold"
+                        : ""
+                    }`}
+                    onClick={toggleMenu}
                   >
-                    Sign Out
-                  </button>
-                </div>
-              )}
+                    Orders
+                  </Link>
+                )}
+                {!isAuthenticated ? (
+                  <Link
+                    to="/signin"
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition duration-300 text-center"
+                    onClick={toggleMenu}
+                  >
+                    Sign In
+                  </Link>
+                ) : (
+                  <div className="flex flex-col space-y-2">
+                    {isAdminUser && (
+                      <Link
+                        to="/sellform"
+                        className="bg-yellow-400 hover:bg-yellow-500 text-black px-4 py-2 rounded-lg transition duration-300 text-center"
+                        onClick={toggleMenu}
+                      >
+                        Sell
+                      </Link>
+                    )}
+                    <button
+                      onClick={(e) => {
+                        handleSignout(e);
+                        toggleMenu();
+                      }}
+                      className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition duration-300"
+                    >
+                      Sign Out
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </nav>
   );
