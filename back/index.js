@@ -103,6 +103,11 @@ app.get(
   }
 );
 
+// Simple health check endpoint
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok" });
+});
+
 app.use("/api/auth", authRoutes);
 app.use("/api/shop", shopRoutes);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
